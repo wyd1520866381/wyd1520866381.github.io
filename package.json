@@ -6,6 +6,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
+    "upload": "hexo generate & hexo deploy",
     "server": "hexo server"
   },
   "hexo": {
@@ -20,8 +21,10 @@
     "hexo-generator-tag": "^2.0.0",
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^6.0.0",
-    "hexo-renderer-stylus": "^3.0.0",
+    "hexo-renderer-pug": "^3.0.0",
+    "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
+    "hexo-theme-butterfly": "^5.3.5",
     "hexo-theme-landscape": "^1.0.0"
   }
 }
