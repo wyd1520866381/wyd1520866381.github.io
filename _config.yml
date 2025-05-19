@@ -3,9 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Blog
-subtitle: "一个人的博客"
-description: "sss"
+title: Edon Wang
+subtitle: "博客与生活"
+description: "一个前端工程师的博客，记录学习与生活"
+top_img: ""
 keywords:
   [
     "王艺栋",
@@ -39,7 +40,7 @@ timezone: "Asia/Shanghai"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://wyd1520866381.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
