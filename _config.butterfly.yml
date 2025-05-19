@@ -3,6 +3,38 @@
 ## Themes: https://hexo.io/themes/
 theme: butterfly
 
+# Site Information
+subtitle:
+  enable: true
+  effect: true
+  typed_option:
+    source: false # If you want to use an array, set it to true. e.g. source: ["Sub 1", "Sub 2"]
+    sub: "一位热爱探索新技术的全栈开发者，专注于WebGL、AR/VR领域"
+
+# Avatar
+avatar:
+  img: /img/avatar.png # 请将您的头像文件放置在 source/img/avatar.png, 或替换为您的头像链接
+  effect: true # 头像呼吸效果
+
+# Author Card in sidebar
+card_author:
+  enable: true
+  description: "你好，我是[您的名字或昵称]，一名充满热情的开发者，在前端、WebGL和AR/VR领域有多年经验。欢迎来到我的博客！"
+  button:
+    enable: true
+    icon: fas fa-envelope
+    text: 联系我
+    link: mailto:wyd0617@qq.com
+
+# Social links
+social:
+  fas fa-envelope: mailto:wyd0617@qq.com || Email
+  # fab fa-github: https://github.com/yourusername || Github # 请替换为您的Github链接
+  # fab fa-linkedin: https://linkedin.com/in/yourusername || LinkedIn # 请替换为您的LinkedIn链接
+
+# Footer Custom Text
+custom_text: Powered by Hexo & Theme Butterfly. <br> wyd1520866381.github.io
+
 # Menu Settings
 menu:
   首页: / || fas fa-home
