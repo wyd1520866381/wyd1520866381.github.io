@@ -21,23 +21,16 @@ subtitle:
   # 如果关闭打字效果，subtitle 只会显示 sub 的第一行文字
   sub:
 
+# 页面布局
 index_layout: 3
+
+tag_img: "/images/bg1.png" # 首页顶部图片
+index_img: "/images/bg2.png" # 文章页顶部图片
 
 # Avatar
 avatar:
   img: /images/avatar.png # 头像图片
-
   effect: false # 头像效果
-
-# Author Card in sidebar
-card_author:
-  enable: true
-  description: "你好，我是[您的名字或昵称]，一名充满热情的开发者，在前端、WebGL和AR/VR领域有多年经验。欢迎来到我的博客！"
-  button:
-    enable: true
-    icon: fas fa-envelope
-    text: 联系我
-    link: mailto:wyd0617@qq.com
 
 # Social links
 social:
@@ -53,8 +46,7 @@ menu:
   项目: /projects/ || fas fa-project-diagram
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
-  归档: /archives/ || fas fa-archive
-  图库: /gallery/ || fas fa-image
+  # 归档: /archives/ || fas fa-archive
   关于我: /about/ || fas fa-user
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
@@ -75,6 +67,17 @@ preloader:
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url: /styles/loading-bar.css
 
+footer:
+  owner:
+    # 是否启用所有者显示
+    enable: true
+    # 网站创建年份
+    since: 2019
+  # 自定义文本
+  custom_text: "由 Hexo 强力驱动 & Butterfly 主题设计。<br> wyd1520866381.github.io"
+  # 主题和框架的版权声明
+  copyright: false
+
 aside:
   enable: true
   position: left
@@ -85,11 +88,10 @@ aside:
       enable: true
       icon: fas fa-envelope
       text: 联系我
+      link: mailto:wyd0617@qq.com
   card_announcement:
     enable: true
     title: 联系方式
-    content: "WeChat: wyd1520866381<br>QQ: 1520866381" 
+    content: "WeChat: wyd1520866381<br>QQ: 1520866381"
   card_webinfo:
     enable: false
-
-
