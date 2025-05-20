@@ -28,20 +28,21 @@ card_author:
 
 # Social links
 social:
-  fas fa-envelope: mailto:wyd0617@qq.com || Email
+  fas fa-envelope: mailto:wyd0617@qq.com || 邮箱
   # fab fa-github: https://github.com/yourusername || Github # 请替换为您的Github链接
   # fab fa-linkedin: https://linkedin.com/in/yourusername || LinkedIn # 请替换为您的LinkedIn链接
 
 # Footer Custom Text
-custom_text: Powered by Hexo & Theme Butterfly. <br> wyd1520866381.github.io
+custom_text: 由 Hexo 强力驱动 & Butterfly 主题设计。<br> wyd1520866381.github.io
 
-# Menu Settings
+# 菜单设置
 menu:
   首页: / || fas fa-home
   归档: /archives/ || fas fa-archive
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
-  关于: /about/ || fas fa-user
+  图库: /gallery/ || fas fa-image
+  关于我: /about/ || fas fa-user
 
 error_404:
   enable: true
