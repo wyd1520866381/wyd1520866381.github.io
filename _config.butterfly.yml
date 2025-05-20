@@ -59,13 +59,13 @@ error_404:
 
 # 加载动画 Loading Animation
 preloader:
-  enable: false
+  enable: true
   # source
   # 1. fullpage-loading
   # 2. pace (progress bar)
   source: 2
   # pace theme (see https://codebyzach.github.io/pace/)
-  pace_css_url: /styles/loading-bar.css
+  pace_css_url: /styles/minimal.css
 
 footer:
   owner:
