@@ -4,7 +4,6 @@
 
 # 站点信息
 title: Edon Wang's Blog
-subtitle: "博客与生活"
 description: "记录前端开发、技术成长与生活点滴"
 top_img: ""
 keywords:
@@ -35,7 +34,7 @@ keywords:
     "Docker",
   ]
 author: Edon Wang(王艺栋)
-language: zh
+language: zh-CN
 timezone: "Asia/Shanghai"
 
 # URL
