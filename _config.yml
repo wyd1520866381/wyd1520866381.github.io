@@ -3,7 +3,7 @@
 ## 源码: https://github.com/hexojs/hexo/
 
 # 站点信息
-title: Edon Wang
+title: Edon Wang's Blog
 subtitle: "博客与生活"
 description: "记录前端开发、技术成长与生活点滴"
 top_img: ""
@@ -34,7 +34,7 @@ keywords:
     "Jenkins",
     "Docker",
   ]
-author: Edon Wang
+author: Edon Wang(王艺栋)
 language: zh
 timezone: "Asia/Shanghai"
 

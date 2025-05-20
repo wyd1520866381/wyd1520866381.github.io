@@ -13,7 +13,7 @@ subtitle:
 
 # Avatar
 avatar:
-  img: /img/avatar.png # 请将您的头像文件放置在 source/img/avatar.png, 或替换为您的头像链接
+  img: /images/a.png # 请将您的头像文件放置在 source/img/avatar.png, 或替换为您的头像链接
   effect: true # 头像呼吸效果
 
 # Author Card in sidebar
@@ -38,9 +38,10 @@ custom_text: 由 Hexo 强力驱动 & Butterfly 主题设计。<br> wyd1520866381
 # 菜单设置
 menu:
   首页: / || fas fa-home
-  归档: /archives/ || fas fa-archive
+  项目: /projects/ || fas fa-project-diagram
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
+  归档: /archives/ || fas fa-archive
   图库: /gallery/ || fas fa-image
   关于我: /about/ || fas fa-user
 
