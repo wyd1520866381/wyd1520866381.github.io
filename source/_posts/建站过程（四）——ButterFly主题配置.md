@@ -12,6 +12,4 @@ series: 建站过程
 
 ## Butterfly 主题配置过程
 
-（待补充内容）
-
 {% series %}
