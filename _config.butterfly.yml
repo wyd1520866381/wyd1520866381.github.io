@@ -67,6 +67,12 @@ preloader:
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url: /styles/minimal.css
 
+series:
+  enable: true
+  orderBy: "date" # Order by title or date
+  order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
+  number: true
+
 footer:
   owner:
     # 是否启用所有者显示
@@ -95,3 +101,12 @@ aside:
     content: "WeChat: wyd1520866381<br>QQ: 1520866381"
   card_webinfo:
     enable: false
+  card_post_series:
+    # 是否显示系列文章卡片
+    enable: true
+    # 标题显示系列名称
+    series_title: false
+    # 排序方式：title 或 date
+    orderBy: "date"
+    # 排序顺序：1 表示升序，-1 表示降序
+    order: -1

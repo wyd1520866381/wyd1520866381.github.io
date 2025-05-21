@@ -3,11 +3,12 @@ title: 个人介绍
 date: 2025-05-19 22:12:12
 comments: false
 top_img: /about/images/topimg.png
+aside: false
 ---
 
 ## 🙋‍♂️ 个人简介
 
-前端主程，专注于 WebGL、AR/VR、三维可视化与创新前端技术。拥有 5 年以上前端开发经验，主导并参与多个元宇宙、文旅 AR、数据可视化等创新项目，致力于用前沿技术提升产品体验与商业价值。
+嗨~ 我是王艺栋，前端工程师，专注于 WebGL、AR/VR、三维可视化与创新前端技术。拥有 5 年以上前端开发经验，主导并参与多个元宇宙、文旅 AR、数据可视化等创新项目，致力于用前沿技术提升产品体验与商业价值。
 
 ## 🌟 自我评价
 
@@ -53,7 +54,7 @@ top_img: /about/images/topimg.png
 - **QQ：** 1520866381
 - **电话：** 13514112581
 - **现居地：** 大连
-- **在线作品：** [3xiao-editor.netlify.app](https://3xiao-editor.netlify.app)｜[fiy-ball.netlify.app](https://fiy-ball.netlify.app)
+- **部分作品：** [3xiao-editor.netlify.app](https://3xiao-editor.netlify.app)｜[fiy-ball.netlify.app](https://fiy-ball.netlify.app)
 
 ## 🖼️ 作品集
 
