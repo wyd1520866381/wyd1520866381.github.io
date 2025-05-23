@@ -116,9 +116,28 @@ top_img: /projects/images/topimg.png
 <style>
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr); /* 默认手机屏幕显示1列 */
   gap: 20px;
   margin-top: 20px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr); /* 屏幕宽度大于600px时显示2列 */
+  }
+}
+
+@media (min-width: 900px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr); /* 屏幕宽度大于900px时显示3列 */
+  }
+}
+
+@media (min-width: 1200px) {
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr); /* 屏幕宽度大于1200px时显示4列 */
+  }
 }
 
 .project-card {

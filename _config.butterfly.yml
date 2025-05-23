@@ -32,6 +32,9 @@ avatar:
   img: /images/avatar.jpg # 头像图片
   effect: false # 头像效果
 
+# Favicon
+favicon: /images/ico.ico
+
 # Social links
 social:
   fas fa-envelope: mailto:wyd0617@qq.com || 邮箱
@@ -110,3 +113,33 @@ aside:
     orderBy: "date"
     # 排序顺序：1 表示升序，-1 表示降序
     order: -1
+
+copy:
+  enable: true
+  # Add the copyright information after copied content
+  copyright:
+    enable: true
+    limit_count: 150
+
+theme_color:
+  enable: true
+  main: "#3498db"
+  paginator: "#bdc3c7"
+  button_hover: "#e0e0e0"
+  text_selection: "#3498db"
+  link_color: "#007aff"
+  meta_color: "#7f8c8d"
+  hr_color: "#ecf0f1"
+  code_foreground: "#333333"
+  code_background: "rgba(236, 240, 241, .5)"
+  toc_color: "#3498db"
+  blockquote_padding_color: "#bdc3c7"
+  blockquote_background_color: "rgba(189, 195, 199, .2)"
+  scrollbar_color: "#bdc3c7"
+  meta_theme_color_light: "ffffff"
+  meta_theme_color_dark: "#1a1a1a"
+
+# Add a mask to the header and footer
+mask:
+  header: true
+  footer: true
