@@ -1,5 +1,5 @@
 ---
-title: 建站过程（二）——Rspress尝试
+title: 二、建站过程——Rspress尝试
 date: 2025-05-20 10:00:01
 tags:
   - 建站
