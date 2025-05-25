@@ -51,9 +51,8 @@ menu:
   分类: /categories/ || fas fa-folder-open
   # 归档: /archives/ || fas fa-archive
   关于我: /about/ || fas fa-user
-  # List||fas fa-list:
-  #   Music: /music/ || fas fa-music
-  #   Movie: /movies/ || fas fa-video
+  # 在线体验||fas fa-list:
+  #   推金币: /coins/index.html || fas fa-music
 
 error_404:
   enable: true

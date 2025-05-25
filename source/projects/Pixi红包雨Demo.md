@@ -1,27 +1,35 @@
 ---
 title: Pixi红包雨Demo
-date: 2025-05-20 # Placeholder date, can be updated later
+date: 2025-05-20
 layout: project
-description: Pixi红包雨Demo demo 项目
 ---
 
-<!-- 主图位置 -->
+## 项目技术栈 🛠️
 
-## 项目内容
+- 前端：HTML5 + JavaScript + CSS3
+- 游戏引擎：Pixi.js + WebGL
+- 动画：GSAP + Tween.js
+- 音效：Web Audio API
 
-Pixi红包雨Demo demo 项目内容描述。
+## 项目内容 🧧
 
-## 项目亮点/成果
+Pixi红包雨Demo 项目，基于Pixi.js引擎开发的红包雨互动游戏。
 
-- 亮点1
-- 亮点2
+- 红包雨效果：粒子系统、重力模拟、碰撞检测
+- 交互功能：点击收集、分数统计、音效反馈
+- 视觉效果：动画过渡、特效渲染、UI界面
+- 性能优化：对象池、帧率控制、内存管理
 
-## 角色
+## 项目亮点/成果 ✨
 
-项目角色
+- 流畅的红包雨动画效果
+- 高性能的粒子系统实现
+- 响应式交互体验
 
-## 时间
+## 角色 👨‍💻
 
-项目时间
+前端开发
 
-<!-- 详情图和录屏位置 -->
+## 时间 🗓️
+
+2025.5

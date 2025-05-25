@@ -2,12 +2,23 @@
 title: AR眼镜穿戴-H5
 date: 2023-01-01
 layout: project
-description: AR穿戴眼镜与照片穿戴，支持高精度人脸AR叠加。
 ---
+
+## 项目技术栈 🛠️
+
+- 前端：HTML5 + JavaScript + CSS3
+- AR技术：WebRTC + MediaPipe
+- 3D渲染：Three.js + WebGL
+- 人脸识别：TensorFlow.js + Face-api.js
 
 ## 项目内容 👓
 
 AR穿戴眼镜、平面照片穿戴眼镜。
+
+- AR穿戴：实时人脸检测、眼镜模型叠加、动态跟踪
+- 照片穿戴：静态图片处理、人脸定位、眼镜合成
+- 模型管理：眼镜库管理、纹理切换、样式定制
+- 交互功能：拍照保存、分享功能、滤镜效果
 
 ## 项目亮点/成果 ✨
 

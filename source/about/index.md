@@ -8,7 +8,9 @@ aside: false
 
 ## 🙋‍♂️ 个人简介
 
-嗨~ 我是王艺栋，前端工程师，专注于 WebGL、AR/VR、三维可视化与创新前端技术。拥有 5 年以上前端开发经验，主导并参与多个元宇宙、文旅 AR、数据可视化等创新项目，致力于用前沿技术提升产品体验与商业价值。
+&nbsp;&nbsp;&nbsp;&nbsp;嗨~ 我是Edon Wang，前端工程师，专注于 WebGL、AR/VR、三维可视化与创新前端技术。拥有 5 年以上前端开发经验，主导并参与多个元宇宙、文旅 AR、数据可视化等创新项目，致力于用前沿技术提升产品体验与商业价值。
+
+![My Skills](/about/images/skills.svg)
 
 ## 🌟 自我评价
 
@@ -24,6 +26,7 @@ aside: false
 - **全栈与服务端：** Node.js、Java、SpringMVC、MySQL、MongoDB
 - **游戏与三维引擎：** Cocos（XForge）、Unity3D UI 层
 - **其他：** Web3 区块链、WebVR、项目架构设计、团队管理
+
 
 ## 👨‍💻 工作经历
 
@@ -52,7 +55,6 @@ aside: false
 - **邮箱：** [wyd0617@qq.com](mailto:wyd0617@qq.com)
 - **微信：** wyd1520866381
 - **QQ：** 1520866381
-- **电话：** 13514112581
 - **现居地：** 大连
 - **部分作品：** [3xiao-editor.netlify.app](https://3xiao-editor.netlify.app)｜[fiy-ball.netlify.app](https://fiy-ball.netlify.app)
 

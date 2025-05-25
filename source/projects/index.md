@@ -14,7 +14,7 @@ top_img: /projects/images/topimg.png
 <div class="project-grid">
   <a href="/projects/大空间票务系统" class="project-card">
     <div class="project-icon">🎫</div>
-    <div class="project-title">大空间票务系统（小程序+后台）</div>
+    <div class="project-title">大空间票务系统（三端）</div>
   </a>
   <a href="/projects/大空间LBE播控系统" class="project-card">
     <div class="project-icon">🎬</div>
