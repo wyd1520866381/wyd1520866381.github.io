@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>一、建站过程——框架选型 | Edon Wang's Blog</title><meta name="author" content="Edon Wang(王艺栋)"><meta name="copyright" content="Edon Wang(王艺栋)"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="记录建站过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一、建站过程——框架选型">
+<meta property="og:url" content="https://wyd1520866381.github.io/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Edon Wang&#39;s Blog">
+<meta property="og:description" content="记录建站过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wyd1520866381.github.io/images/avatar.jpg">
+<meta property="article:published_time" content="2025-05-19T10:21:02.000Z">
+<meta property="article:modified_time" content="2025-05-22T09:03:03.677Z">
+<meta property="article:author" content="Edon Wang(王艺栋)">
+<meta property="article:tag" content="建站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wyd1520866381.github.io/images/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "一、建站过程——框架选型",
+  "url": "https://wyd1520866381.github.io/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/",
+  "image": "https://wyd1520866381.github.io/images/avatar.jpg",
+  "datePublished": "2025-05-19T10:21:02.000Z",
+  "dateModified": "2025-05-22T09:03:03.677Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Edon Wang(王艺栋)",
+      "url": "https://wyd1520866381.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/ico.ico"><link rel="canonical" href="https://wyd1520866381.github.io/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1a1a')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: Edon Wang(王艺栋)","link":"链接: ","source":"来源: Edon Wang's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '一、建站过程——框架选型',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/styles/minimal.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Edon Wang's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">一、建站过程——框架选型</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">一、建站过程——框架选型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-19T10:21:02.000Z" title="发表于 2025-05-19 18:21:02">2025-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-22T09:03:03.677Z" title="更新于 2025-05-22 17:03:03">2025-05-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="建站框架选型过程"><a href="#建站框架选型过程" class="headerlink" title="建站框架选型过程"></a>建站框架选型过程</h2><p>在搭建个人博客的初期，我调研了几种流行的静态站点生成器，旨在找到一个既能满足我的技术偏好，又能提供良好写作和维护体验的框架。以下是我当时考虑的几个主要选项：</p>
+<h3 id="1-Nextra"><a href="#1-Nextra" class="headerlink" title="1. Nextra"></a>1. Nextra</h3><p>Nextra 是基于 Next.js 的静态站点生成器，特别适合构建文档网站。它利用了 Next.js 的强大功能，如文件系统路由、API 路由等，并且支持 MDX，可以直接在 Markdown 中使用 React 组件。Nextra 的优势在于其灵活性和与 React 生态的紧密结合，对于熟悉 Next.js 的开发者来说非常友好。然而，对于一个以博客为主的站点，Nextra 可能显得有些“重”，且其主要设计目标是文档，而非传统意义上的博客。</p>
+<h3 id="2-Dumi"><a href="#2-Dumi" class="headerlink" title="2. Dumi"></a>2. Dumi</h3><p>Dumi 是基于 UmiJS 的组件级文档和静态站点工具，主要面向组件开发者。它提供了丰富的组件演示和调试能力，内置全文搜索，并且编译性能优秀。Dumi 在展示组件和构建组件库文档方面表现出色，但与 Nextra 类似，它更侧重于技术文档和组件展示，用于个人博客可能不是最直接的选择。</p>
+<h3 id="3-Rspress"><a href="#3-Rspress" class="headerlink" title="3. Rspress"></a>3. Rspress</h3><p>Rspress 是基于 Rspack 的静态站点生成器，强调构建速度和性能。它同样支持 MDX，并提供了一些开箱即用的功能。Rspress 作为新兴的工具，在性能方面有潜力，但其生态和社区成熟度相比老牌框架可能还有差距，这在选择长期使用的博客框架时是一个需要考虑的因素。</p>
+<h3 id="4-Docusaurus"><a href="#4-Docusaurus" class="headerlink" title="4. Docusaurus"></a>4. Docusaurus</h3><p>Docusaurus 是由 Facebook 开源的静态站点生成器，广泛用于构建项目文档网站。它基于 React，支持 MDX，提供了版本控制、国际化、全文搜索等强大功能。Docusaurus 的社区活跃，文档丰富，是一个非常成熟和可靠的选择。虽然它主要面向文档，但也可以用于构建博客。它的功能全面，但配置相对复杂，对于只想快速搭建一个简单博客的用户来说，可能学习成本稍高。</p>
+<h3 id="5-Hexo"><a href="#5-Hexo" class="headerlink" title="5. Hexo"></a>5. Hexo</h3><p>Hexo 是一个快速、简单、强大的博客框架，基于 Node.js。它以其简洁的命令行操作、丰富的插件和主题生态而闻名。Hexo 的核心设计就是为博客而生，提供了方便的文章管理、分类、标签等功能。它的生成速度快，部署简单，并且有大量的第三方主题可供选择，如我目前使用的 Butterfly 主题，提供了美观的界面和丰富的功能。</p>
+<h3 id="最终选择-Hexo-的原因"><a href="#最终选择-Hexo-的原因" class="headerlink" title="最终选择 Hexo 的原因"></a>最终选择 Hexo 的原因</h3><p>在权衡了以上几个框架后，我最终选择了 Hexo。主要原因如下：</p>
+<ul>
+<li><strong>专注于博客:</strong> Hexo 的设计初衷就是为了构建博客，其工作流程和功能都非常符合个人博客的需求。</li>
+<li><strong>简单易用:</strong> Hexo 的安装、配置和使用都相对简单，通过命令行即可完成大部分操作，降低了入门门槛。</li>
+<li><strong>丰富的生态:</strong> Hexo 拥有庞大的社区和丰富的插件、主题资源，可以轻松实现各种定制需求。特别是 Butterfly 主题，提供了非常现代和美观的界面，并且功能强大。</li>
+<li><strong>生成速度快:</strong> Hexo 的静态文件生成速度非常快，这对于频繁更新博客的用户来说非常重要。</li>
+<li><strong>部署便捷:</strong> Hexo 支持多种部署方式，通过简单的配置即可将生成的静态文件部署到 GitHub Pages、Coding Pages 等平台。</li>
+</ul>
+<p>虽然 Nextra、Dumi、Rspress 和 Docusaurus 在各自领域都有独特的优势，但考虑到我主要的需求是搭建一个易于维护、功能完善且界面美观的个人博客，Hexo 配合 Butterfly 主题成为了最适合我的选择。这个选择让我在建站初期能够快速搭建起博客框架，将更多精力投入到内容创作上。</p>
+<ol class="series-items"><li><a href="/2025/05/20/%E5%9B%9B%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94ButterFly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="四、建站过程——ButterFly主题配置">四、建站过程——ButterFly主题配置</a></li><li><a href="/2025/05/20/%E4%B8%89%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Hexo%E6%90%AD%E5%BB%BA/" title="三、建站过程——Hexo搭建">三、建站过程——Hexo搭建</a></li><li><a href="/2025/05/20/%E4%BA%8C%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Rspress%E5%B0%9D%E8%AF%95/" title="二、建站过程——Rspress尝试">二、建站过程——Rspress尝试</a></li><li><a href="/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/" title="一、建站过程——框架选型">一、建站过程——框架选型</a></li></ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wyd1520866381.github.io">Edon Wang(王艺栋)</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wyd1520866381.github.io/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/">https://wyd1520866381.github.io/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://wyd1520866381.github.io" target="_blank">Edon Wang's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BB%BA%E7%AB%99/">建站</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/05/20/%E4%BA%8C%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Rspress%E5%B0%9D%E8%AF%95/" title="二、建站过程——Rspress尝试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">二、建站过程——Rspress尝试</div></div><div class="info-2"><div class="info-item-1">Rspress 尝试过程Rspress 是一个基于 Rspack 的静态站点生成器，特别适合用于构建文档网站。在框架选型阶段，我也尝试了 Rspress，以下是尝试过程及一些心得。 Rspress 搭建过程搭建 Rspress 的过程相对直接，主要参考了其官方文档  步骤大致如下：  初始化项目: 可以通过脚手架 npm create rspress@latest 或手动创建目录并初始化 npm 项目。我选择了手动方式，创建了项目目录并运行 npm init -y。  安装 Rspress: 使用 npm、pnpm、yarn 或 bun 安装 Rspress 作为开发依赖。我使用了 npm：npm install rspress -D  创建文档目录和首页: 按照约定，创建 docs 目录并在其中创建 index.md 作为首页：mkdir docs &amp;&amp; echo &#39;# Hello world&#39; &gt; docs/index.md  配置 package.json 脚本: 在 package.json...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/05/20/%E4%BA%8C%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Rspress%E5%B0%9D%E8%AF%95/" title="二、建站过程——Rspress尝试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-20</div><div class="info-item-2">二、建站过程——Rspress尝试</div></div><div class="info-2"><div class="info-item-1">Rspress 尝试过程Rspress 是一个基于 Rspack 的静态站点生成器，特别适合用于构建文档网站。在框架选型阶段，我也尝试了 Rspress，以下是尝试过程及一些心得。 Rspress 搭建过程搭建 Rspress 的过程相对直接，主要参考了其官方文档  步骤大致如下：  初始化项目: 可以通过脚手架 npm create rspress@latest 或手动创建目录并初始化 npm 项目。我选择了手动方式，创建了项目目录并运行 npm init -y。  安装 Rspress: 使用 npm、pnpm、yarn 或 bun 安装 Rspress 作为开发依赖。我使用了 npm：npm install rspress -D  创建文档目录和首页: 按照约定，创建 docs 目录并在其中创建 index.md 作为首页：mkdir docs &amp;&amp; echo &#39;# Hello world&#39; &gt; docs/index.md  配置 package.json 脚本: 在 package.json...</div></div></div></a><a class="pagination-related" href="/2025/05/20/%E4%B8%89%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Hexo%E6%90%AD%E5%BB%BA/" title="三、建站过程——Hexo搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-20</div><div class="info-item-2">三、建站过程——Hexo搭建</div></div><div class="info-2"><div class="info-item-1">Hexo 搭建过程1. 安装 Node.js 和 Gitnode 使用 nvm 管理、git 使用 homebrew 安装即可（windows 使用安装包即可 2. 安装 Hexo打开终端，运行以下命令全局安装 Hexo CLI： 1npm install -g hexo-cli  安装完成后，验证 Hexo 是否安装成功： 1hexo version  3. 初始化博客选择一个合适的目录，运行以下命令初始化一个新的 Hexo 博客： 123hexo init &lt;folder&gt;cd &lt;folder&gt;npm install  &lt;folder&gt; 是你想要创建博客的文件夹名称。npm install 命令会安装博客所需的依赖。 4. 生成和预览博客初始化完成后，可以生成静态文件并在本地预览博客： 12hexo generatehexo server  运行 hexo server 后，通常可以在浏览器中访问 http://localhost:4000 查看你的博客。 部署到 GitHub Pages将 Hexo 博客部署到 GitHub Pages...</div></div></div></a><a class="pagination-related" href="/2025/05/20/%E5%9B%9B%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94ButterFly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="四、建站过程——ButterFly主题配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-20</div><div class="info-item-2">四、建站过程——ButterFly主题配置</div></div><div class="info-2"><div class="info-item-1">Butterfly 主题配置过程1. 安装 Butterfly 主题首先，确保你的 Hexo 博客已经搭建完成。然后，在你的 Hexo 博客根目录下打开终端，运行以下命令安装 Butterfly 主题： 1npm install hexo-theme-butterfly  安装完成后，修改 Hexo 根目录下的 _config.yml 文件，将 theme 的值更改为 butterfly。 1theme: butterfly  2. 创建主题配置文件为了方便管理和升级主题，建议不要直接修改主题文件夹下的配置文件。可以将 node_modules 文件夹下 hexo-theme-butterfly 中的 _config.yml 文件复制到 Hexo 项目根目录下，并重命名为 _config.butterfly.yml。 1cp -i node_modules/hexo-theme-butterfly/_config.yml _config.butterfly.yml  Hexo 会优先读取根目录下的 _config.butterfly.yml 文件作为主题配置文件。 3....</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Edon Wang(王艺栋)</div><div class="author-info-description">你好，我是Edon Wang(王艺栋)，一名充满热情的开发者，在前端、WebGL、元宇宙和AR/VR领域有多年经验。欢迎来到我的博客！</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" href="mailto:wyd0617@qq.com"><i class="fas fa-envelope"></i><span>联系我</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:wyd0617@qq.com" target="_blank" title="邮箱"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/wyd1520866381" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">WeChat: wyd1520866381<br>QQ: 1520866381</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%99%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">建站框架选型过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Nextra"><span class="toc-number">1.1.</span> <span class="toc-text">1. Nextra</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Dumi"><span class="toc-number">1.2.</span> <span class="toc-text">2. Dumi</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Rspress"><span class="toc-number">1.3.</span> <span class="toc-text">3. Rspress</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Docusaurus"><span class="toc-number">1.4.</span> <span class="toc-text">4. Docusaurus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Hexo"><span class="toc-number">1.5.</span> <span class="toc-text">5. Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E9%80%89%E6%8B%A9-Hexo-%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.6.</span> <span class="toc-text">最终选择 Hexo 的原因</span></a></li></ol></li></ol></div></div><div class="card-widget card-post-series"><div class="item-headline"><i class="fa-solid fa-layer-group"></i><span>系列文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E5%9B%9B%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94ButterFly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="四、建站过程——ButterFly主题配置">四、建站过程——ButterFly主题配置</a><time datetime="2025-05-20T02:00:03.000Z" title="发表于 2025-05-20 10:00:03">2025-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E4%B8%89%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Hexo%E6%90%AD%E5%BB%BA/" title="三、建站过程——Hexo搭建">三、建站过程——Hexo搭建</a><time datetime="2025-05-20T02:00:02.000Z" title="发表于 2025-05-20 10:00:02">2025-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E4%BA%8C%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Rspress%E5%B0%9D%E8%AF%95/" title="二、建站过程——Rspress尝试">二、建站过程——Rspress尝试</a><time datetime="2025-05-20T02:00:01.000Z" title="发表于 2025-05-20 10:00:01">2025-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/" title="一、建站过程——框架选型">一、建站过程——框架选型</a><time datetime="2025-05-19T10:21:02.000Z" title="发表于 2025-05-19 18:21:02">2025-05-19</time></div></div></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E5%9B%9B%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94ButterFly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="四、建站过程——ButterFly主题配置">四、建站过程——ButterFly主题配置</a><time datetime="2025-05-20T02:00:03.000Z" title="发表于 2025-05-20 10:00:03">2025-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E4%B8%89%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Hexo%E6%90%AD%E5%BB%BA/" title="三、建站过程——Hexo搭建">三、建站过程——Hexo搭建</a><time datetime="2025-05-20T02:00:02.000Z" title="发表于 2025-05-20 10:00:02">2025-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/20/%E4%BA%8C%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94Rspress%E5%B0%9D%E8%AF%95/" title="二、建站过程——Rspress尝试">二、建站过程——Rspress尝试</a><time datetime="2025-05-20T02:00:01.000Z" title="发表于 2025-05-20 10:00:01">2025-05-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/19/%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B/" title="一、建站过程——框架选型">一、建站过程——框架选型</a><time datetime="2025-05-19T10:21:02.000Z" title="发表于 2025-05-19 18:21:02">2025-05-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Edon Wang(王艺栋)</div><div class="footer_custom_text">由 Hexo 强力驱动 & Butterfly 主题设计。<br> wyd1520866381.github.io</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
