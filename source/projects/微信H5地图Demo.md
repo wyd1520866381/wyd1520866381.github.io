@@ -6,14 +6,13 @@ layout: project
 
 ## 项目技术栈 🛠️
 
-- 前端：HTML5 + JavaScript + CSS3
-- 地图API：腾讯地图API / 百度地图API / 高德地图API
-- 框架：Vue.js / React / Vanilla JS
-- 构建工具：Webpack / Vite
+- 前端：Umijs
+- 地图 API：Mapbox
+- 渲染引擎：WebGL + Three.js
 
 ## 项目内容 🗺️
 
-微信H5地图Demo 项目，展示如何在微信H5页面集成和使用地图功能。
+微信 H5 地图 Demo 项目，展示如何在微信 H5 页面集成和使用地图功能。
 
 - 地图展示：地图加载、缩放、平移
 - 定位功能：获取当前位置、位置标记
@@ -22,7 +21,7 @@ layout: project
 
 ## 项目亮点/成果 ✨
 
-- 微信H5环境下的地图集成方案
+- 微信 H5 环境下的地图集成方案
 - 基础地图功能的实现示例
 - 可扩展的地图组件设计
 

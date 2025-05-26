@@ -8,15 +8,17 @@ layout: project
 
 - 游戏引擎：Cocos Creator 3.x
 - 编程语言：TypeScript
-- 物理引擎：Cocos Physics
 - 音效：Cocos Audio
+- 项目框架：XForge
+- 物理引擎：Box2D
+- 动画：Spine
 
 ## 项目内容 🐑
 
-cocos三消（仿羊了个羊）游戏项目，基于Cocos Creator开发的三消类休闲游戏。
+cocos 三消（仿羊了个羊）游戏项目，基于 Cocos Creator 开发的三消类休闲游戏。
 
 - 游戏机制：三消玩法、关卡设计、难度递增
-- 视觉效果：动画过渡、粒子特效、UI界面
+- 视觉效果：动画过渡、粒子特效、UI 界面
 - 音效系统：背景音乐、音效反馈、音量控制
 - 数据管理：关卡进度、分数统计、本地存储
 

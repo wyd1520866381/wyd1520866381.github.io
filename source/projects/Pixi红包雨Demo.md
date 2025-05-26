@@ -6,18 +6,17 @@ layout: project
 
 ## 项目技术栈 🛠️
 
-- 前端：HTML5 + JavaScript + CSS3
+- 前端：Umi.js
 - 游戏引擎：Pixi.js + WebGL
 - 动画：GSAP + Tween.js
-- 音效：Web Audio API
 
 ## 项目内容 🧧
 
-Pixi红包雨Demo 项目，基于Pixi.js引擎开发的红包雨互动游戏。
+Pixi 红包雨 Demo 项目，基于 Pixi.js 引擎开发的红包雨互动游戏。
 
 - 红包雨效果：粒子系统、重力模拟、碰撞检测
 - 交互功能：点击收集、分数统计、音效反馈
-- 视觉效果：动画过渡、特效渲染、UI界面
+- 视觉效果：动画过渡、特效渲染、UI 界面
 - 性能优化：对象池、帧率控制、内存管理
 
 ## 项目亮点/成果 ✨

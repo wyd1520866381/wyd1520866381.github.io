@@ -6,24 +6,24 @@ layout: project
 
 ## 项目技术栈 🛠️
 
-- 前端：React + TypeScript + Web3.js
+- 前端：Umi.js + Web3.js + RainbowKit
 - 区块链：Ethereum + Solidity
-- NFT标准：ERC-721 + IPFS
+- NFT 标准：ERC-721
 - 图形处理：SVG + Canvas API
 
 ## 项目内容 🎨
 
-为HOSOO打造的NFT升级DAPP，通过到店打卡或参与活动获取初始NFT，后续扫码升级NFT。
+为 HOSOO 打造的 NFT 升级 DAPP，通过到店打卡或参与活动获取初始 NFT，后续扫码升级 NFT。
 
-- NFT铸造：初始NFT生成、链上存储、元数据管理
+- NFT 铸造：初始 NFT 生成、链上存储、元数据管理
 - 升级机制：扫码升级、属性变更、版本控制
-- 分层展示：SVG分层叠加、动态渲染、视觉效果
+- 分层展示：SVG 分层叠加、动态渲染、视觉效果
 - 链上操作：智能合约交互、交易确认、状态同步
 
 ## 项目亮点/成果 ✨
 
-- NFT链上操作
-- 根据链上数据展示不同NFT形式（SVG分层叠加）
+- NFT 链上操作
+- 根据链上数据展示不同 NFT 形式（SVG 分层叠加）
 
 ## 角色 👨‍💻
 

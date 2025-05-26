@@ -6,10 +6,9 @@ layout: project
 
 ## 项目技术栈 🛠️
 
-- 前端：React + TypeScript + Ant Design Pro
-- 移动端：React Native + NativeBase
-- 后端：Node.js + Express + MongoDB
-- 设计：Figma + Adobe XD
+- 前端：Vue2 + TypeScript + Ant Design Pro
+- 后端：Groovy
+- 数据库：MongoDB
 
 ## 项目内容 🛒
 
@@ -24,11 +23,11 @@ layout: project
 
 - 支持多角色信息化需求
 - 覆盖项目管理、教室管理、班主任管理、库房管理等模块
-- 移动端与PC端功能覆盖广泛
+- 移动端与 PC 端功能覆盖广泛
 
 ## 角色 👨‍💻
 
-前端开发 | 产品设计 | UI设计
+前端开发 | 产品设计 | UI 设计
 
 ## 时间 🗓️
 

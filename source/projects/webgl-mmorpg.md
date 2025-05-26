@@ -1,34 +1,34 @@
 ---
-title: webgl-mmorpg
+title: 单人城市RPG游戏
 date: 2025-05-20
 layout: project
 ---
 
 ## 项目技术栈 🛠️
 
-- 前端：HTML5 + JavaScript + WebGL
-- 3D引擎：Three.js + WebGL
-- 网络：WebSocket + Socket.io
-- 后端：Node.js + Express + MongoDB
+- 前端：Umi.js + React-three-fiber
+- 3D 引擎：Three.js + WebGL
+- 物理引擎：Rapier
 
 ## 项目内容 🎮
 
-WebGL MMORPG 项目，基于WebGL技术开发的多人在线角色扮演游戏。
+单人城市 RPG 游戏项目，基于 Three.js 和 Rapier 引擎开发的单人 Web RPG 游戏。
 
-- 3D渲染：场景渲染、角色建模、光影效果
-- 多人联机：实时同步、状态管理、网络优化
-- 游戏系统：角色系统、技能系统、装备系统
-- 交互功能：聊天系统、组队功能、PVP对战
+- 3D 渲染：场景渲染、角色建模、光影效果
+- 物理模拟：角色运动、碰撞检测、地形生成
+- 交互功能：角色控制、技能释放、物品拾取
+-
 
 ## 项目亮点/成果 ✨
 
-- 流畅的3D游戏体验
-- 稳定的多人联机功能
-- 完整的MMORPG游戏系统
+- 流畅的 3D 游戏体验
+- 丰富的游戏内容和玩法
+- 良好的性能和稳定性
+- 可扩展性和可维护性
 
 ## 角色 👨‍💻
 
-全栈开发
+前端主程
 
 ## 时间 🗓️
 

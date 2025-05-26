@@ -8,7 +8,7 @@ layout: project
 
 - 前端：React + TypeScript + Ant Design Pro
 - 地图：MapBox GL JS
-- 3D渲染：Three.js + WebGL
+- 3D 渲染：Three.js + WebGL
 - 状态管理：Redux Toolkit
 
 ## 项目内容 🗺️
@@ -17,15 +17,15 @@ layout: project
 
 - 管理后台：内容管理、用户管理、数据统计、系统配置
 - 商家后台：商品管理、订单管理、营销活动、数据分析
-- 地图功能：3D模型投放、位置同步、区域管理
-- AR功能：模型渲染、位置追踪、内容展示
+- 地图功能：3D 模型投放、位置同步、区域管理
+- AR 功能：模型渲染、位置追踪、内容展示
 
 ## 项目亮点/成果 ✨
 
-- 使用Antd全家桶开发栈
-- 地图使用MapBox，兼容海外
-- WebGL库使用Threejs
-- 地图与手机APP位置同步，支持模型内容投放
+- 使用 Antd 全家桶开发栈
+- 地图使用 MapBox，兼容海外
+- WebGL 库使用 Threejs
+- 地图与手机 APP 位置同步，支持模型内容投放
 
 ## 角色 👨‍💻
 
