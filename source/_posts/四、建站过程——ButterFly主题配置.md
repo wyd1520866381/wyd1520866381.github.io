@@ -6,7 +6,8 @@ tags:
   - Butterfly
   - Hexo
 categories:
-  - 记录
+  - 前端
+  - 建站
 series: 建站过程
 ---
 
