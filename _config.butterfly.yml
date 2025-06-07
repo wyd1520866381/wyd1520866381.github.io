@@ -25,7 +25,7 @@ subtitle:
 index_layout: 3
 
 tag_img: "/images/bg1.png" # 首页顶部图片
-index_img: "/images/bg2.png" # 文章页顶部图片
+index_img: "/images/bg2.jpg" # 文章页顶部图片
 
 # Avatar
 avatar:
@@ -157,4 +157,5 @@ cover:
     - /images/default-cover.png
 
 index_top_img_height: 44rem
+
 default_top_img: linear-gradient(to right, #00c6ff, #0072ff)
