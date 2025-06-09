@@ -66,7 +66,7 @@ jobs:
           # 服务器的公网IP
           REMOTE_HOST: ${{ secrets.FWQ_IP }}
           # 你打包后产物的文件夹
-          SOURCE: "./public/"
+          SOURCE: "/public"
           # 先清空目标目录
           ARGS: "-avzr"
           # 上传到服务器目标目录
