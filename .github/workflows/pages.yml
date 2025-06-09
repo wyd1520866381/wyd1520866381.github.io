@@ -69,6 +69,6 @@ jobs:
           # 你打包后产物的文件夹
           SOURCE: "./public/"
           # 先清空目标目录
-          ARGS: "-avzr --delete"
+          ARGS: "-avzr"
           # 上传到服务器目标目录
           TARGET: "/opt/1panel/apps/openresty/openresty/www/sites/blog/index"
