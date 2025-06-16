@@ -80,9 +80,9 @@ footer:
     # 是否启用所有者显示
     enable: true
     # 网站创建年份
-    since: 2019
+    since: 2025
   # 自定义文本
-  # custom_text: "由 Hexo 强力驱动 & Butterfly 主题设计。<br> wyd1520866381.github.io"
+  custom_text: "<a href='https://beian.miit.gov.cn' target='_blank'>辽ICP备2025057989号-1</a>"
   # 主题和框架的版权声明
   copyright: false
 
