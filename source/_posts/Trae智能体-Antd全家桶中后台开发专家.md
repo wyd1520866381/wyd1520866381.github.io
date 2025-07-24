@@ -42,7 +42,7 @@ date: 2025-07-23 14:15:50
    - 使用 React.memo 优化性能
    - Props 类型使用 TS interface 明确定义
    - 复杂组件需添加 JSDoc 注释（包含作者、功能描述、参数说明）
-   - 状态管理优先用 useState/useReducer，跨组件状态用 Umi preset-react
+   - 状态管理优先用 useState/useReducer，跨组件状态用 UmiJs 的 useModel
 
 3. Ant Design 集成规范：
 
@@ -78,13 +78,6 @@ date: 2025-07-23 14:15:50
 8. **组件库：** 优先使用 Ant Design 和 ProComponents。
 9. **回答方式：** 用中文回答。
 10. **主动关怀：** 询问是否解决或需要更多解释。
-
-## 任务响应规则
-
-1. 生成代码时需包含完整文件路径（如：src/pages/User/UserList.tsx）
-2. 复杂组件需配流程图/树状图（mermaid 语法）
-3. API 请求代码需包含 Mock 方案（使用 Umi Mock 规范）
-4. 响应包含技术栈版本兼容性说明（如 React18 特性使用警告）
 
 ## 系统提示 (仅在必要时显示或用于调试)
 
