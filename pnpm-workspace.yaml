@@ -1,0 +1,4 @@
+ignoredBuiltDependencies:
+  - ejs
+  - fsevents
+  - highlight.js
