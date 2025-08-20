@@ -1,0 +1,768 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>提示词工程（二）：高级提示技术与应用实践 | Edon Wang's Blog</title><meta name="author" content="Edon Wang(王艺栋)"><meta name="copyright" content="Edon Wang(王艺栋)"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="在提示词工程（一）：基本概念与设计原则中，我们介绍了提示词工程的基础知识。本文将深入探讨高级提示技术，这些技术能够显著提升大语言模型的推理能力、准确性和应用范围。 高级提示技术横评总结在深入学习各种高级提示技术之前，让我们先从多个维度对这些技术进行横向对比，帮助你快速了解每种技术的特点和适用场景。 技术复杂度与实现难度对比   技术名称 实现复杂度 学习难度 开发成本 推荐指数    零样本提示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提示词工程（二）：高级提示技术与应用实践">
+<meta property="og:url" content="http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="Edon Wang&#39;s Blog">
+<meta property="og:description" content="在提示词工程（一）：基本概念与设计原则中，我们介绍了提示词工程的基础知识。本文将深入探讨高级提示技术，这些技术能够显著提升大语言模型的推理能力、准确性和应用范围。 高级提示技术横评总结在深入学习各种高级提示技术之前，让我们先从多个维度对这些技术进行横向对比，帮助你快速了解每种技术的特点和适用场景。 技术复杂度与实现难度对比   技术名称 实现复杂度 学习难度 开发成本 推荐指数    零样本提示">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://edon.website/images/default-cover.png">
+<meta property="article:published_time" content="2025-08-19T09:30:00.000Z">
+<meta property="article:modified_time" content="2025-08-19T09:45:43.476Z">
+<meta property="article:author" content="Edon Wang(王艺栋)">
+<meta property="article:tag" content="提示词工程">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="AI 应用">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="高级技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://edon.website/images/default-cover.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "提示词工程（二）：高级提示技术与应用实践",
+  "url": "http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/",
+  "image": "http://edon.website/images/default-cover.png",
+  "datePublished": "2025-08-19T09:30:00.000Z",
+  "dateModified": "2025-08-19T09:45:43.476Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Edon Wang(王艺栋)",
+      "url": "http://edon.website"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/ico.ico"><link rel="canonical" href="http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1a1a')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: Edon Wang(王艺栋)","link":"链接: ","source":"来源: Edon Wang's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '提示词工程（二）：高级提示技术与应用实践',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0">
+
+<script type="application/ld+json" id="hexo-seo-schema">[
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "http://edon.website",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "@id": "https://developers.google.com/search/docs/advanced/structured-data/sitelinks-searchbox",
+      "target": "http://www.edon.website{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://developers.google.com/search/docs/advanced/structured-data/breadcrumb",
+    "name": "breadcrumb",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": "http://edon.website/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/",
+        "name": "提示词工程"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": "http://edon.website/tags/LLM/",
+        "name": "LLM"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": "http://edon.website/tags/AI-%E5%BA%94%E7%94%A8/",
+        "name": "AI 应用"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": "http://edon.website/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/",
+        "name": "人工智能"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": "http://edon.website/tags/%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF/",
+        "name": "高级技术"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": "http://edon.website/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/",
+        "name": "技术分享"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "item": "http://edon.website/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/AI-%E5%BA%94%E7%94%A8/",
+        "name": "AI 应用"
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "item": "http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/",
+        "name": "提示词工程（二）：高级提示技术与应用实践"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org/",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/"
+    },
+    "headline": "提示词工程（二）：高级提示技术与应用实践",
+    "description": "提示词工程（二）：高级提示技术与应用实践",
+    "image": {
+      "@type": "ImageObject",
+      "url": "/images/default-cover.png",
+      "width": "250",
+      "height": "250"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Edon Wang(王艺栋)"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Edon Wang(王艺栋)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.webmanajemen.com/2022/01/04/frp-redmi-go-tiare-fix/Bypass%20FRP%20Redmi%20Go%20Tiare%20M1903C3GG.jpg",
+        "width": "125",
+        "height": "125"
+      }
+    },
+    "datePublished": "2025-08-19T17:30:00+08:00",
+    "dateModified": "2025-08-19T17:45:43+08:00"
+  }
+]</script>
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" ></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/styles/minimal.css"><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar" title="avatar" itemprop="image"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/default-cover.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Edon Wang's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">提示词工程（二）：高级提示技术与应用实践</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">提示词工程（二）：高级提示技术与应用实践</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-19T09:30:00.000Z" title="发表于 2025-08-19 17:30:00">2025-08-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-19T09:45:43.476Z" title="更新于 2025-08-19 17:45:43">2025-08-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/AI-%E5%BA%94%E7%94%A8/">AI 应用</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>在<a href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">提示词工程（一）：基本概念与设计原则</a>中，我们介绍了提示词工程的基础知识。本文将深入探讨高级提示技术，这些技术能够显著提升大语言模型的推理能力、准确性和应用范围。</p>
+<h2 id="高级提示技术横评总结"><a href="#高级提示技术横评总结" class="headerlink" title="高级提示技术横评总结"></a>高级提示技术横评总结</h2><p>在深入学习各种高级提示技术之前，让我们先从多个维度对这些技术进行横向对比，帮助你快速了解每种技术的特点和适用场景。</p>
+<h3 id="技术复杂度与实现难度对比"><a href="#技术复杂度与实现难度对比" class="headerlink" title="技术复杂度与实现难度对比"></a>技术复杂度与实现难度对比</h3><table>
+<thead>
+<tr>
+<th>技术名称</th>
+<th>实现复杂度</th>
+<th>学习难度</th>
+<th>开发成本</th>
+<th>推荐指数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#1">零样本提示</a></td>
+<td>⭐</td>
+<td>⭐</td>
+<td>⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#2">少样本提示</a></td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#3">链式思考（CoT）</a></td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#4">自我一致性</a></td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#5">生成知识提示</a></td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#6">提示链（Prompt Chaining）</a></td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#7">思维树（ToT）</a></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#8">检索增强生成（RAG）</a></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#9">ReAct 框架</a></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#10">Reflexion</a></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+</tr>
+</tbody></table>
+<h3 id="应用场景适用性分析"><a href="#应用场景适用性分析" class="headerlink" title="应用场景适用性分析"></a>应用场景适用性分析</h3><table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>最适合技术</th>
+<th>次优选择</th>
+<th>不推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单问答</td>
+<td>零样本提示</td>
+<td>少样本提示</td>
+<td>ToT、Reflexion</td>
+</tr>
+<tr>
+<td>复杂推理</td>
+<td>CoT、ToT</td>
+<td>自我一致性</td>
+<td>零样本提示</td>
+</tr>
+<tr>
+<td>代码生成</td>
+<td>少样本提示、CoT</td>
+<td>RAG</td>
+<td>生成知识提示</td>
+</tr>
+<tr>
+<td>知识问答</td>
+<td>RAG</td>
+<td>生成知识提示</td>
+<td>零样本提示</td>
+</tr>
+<tr>
+<td>多步骤任务</td>
+<td>Prompt Chaining、ReAct</td>
+<td>CoT</td>
+<td>零样本提示</td>
+</tr>
+<tr>
+<td>创意写作</td>
+<td>少样本提示</td>
+<td>零样本提示</td>
+<td>RAG</td>
+</tr>
+<tr>
+<td>数学计算</td>
+<td>Program-Aided LM</td>
+<td>CoT</td>
+<td>零样本提示</td>
+</tr>
+<tr>
+<td>逻辑推理</td>
+<td>ToT、CoT</td>
+<td>自我一致性</td>
+<td>零样本提示</td>
+</tr>
+</tbody></table>
+<h3 id="性能与资源消耗对比"><a href="#性能与资源消耗对比" class="headerlink" title="性能与资源消耗对比"></a>性能与资源消耗对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>低消耗</th>
+<th>中等消耗</th>
+<th>高消耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Token 消耗</strong></td>
+<td>零样本提示</td>
+<td>少样本提示、CoT</td>
+<td>ToT、Reflexion、RAG</td>
+</tr>
+<tr>
+<td><strong>计算时间</strong></td>
+<td>零样本提示、少样本提示</td>
+<td>CoT、生成知识提示</td>
+<td>ToT、自我一致性、Reflexion</td>
+</tr>
+<tr>
+<td><strong>实现复杂度</strong></td>
+<td>零样本提示、少样本提示</td>
+<td>CoT、RAG</td>
+<td>ToT、Reflexion、meta-prompting</td>
+</tr>
+<tr>
+<td><strong>准确性提升</strong></td>
+<td>低-中等</td>
+<td>中等-高</td>
+<td>高-极高</td>
+</tr>
+</tbody></table>
+<h3 id="技术发展趋势与前景"><a href="#技术发展趋势与前景" class="headerlink" title="技术发展趋势与前景"></a>技术发展趋势与前景</h3><p><strong>🔥 当前热门技术：</strong></p>
+<ul>
+<li><strong>RAG（检索增强生成）</strong>：企业级应用的首选，解决知识时效性问题</li>
+<li><strong>CoT（链式思考）</strong>：简单易用，效果显著，广泛应用</li>
+<li><strong>ReAct 框架</strong>：工具调用的标准范式，AI Agent 核心技术</li>
+</ul>
+<p><strong>🚀 新兴技术：</strong></p>
+<ul>
+<li><strong>多模态思维链</strong>：图文结合的推理能力</li>
+<li><strong>基于图的提示</strong>：结构化知识表示</li>
+<li><strong>meta-prompting</strong>：自动化提示词优化</li>
+</ul>
+<p><strong>📈 发展方向：</strong></p>
+<ol>
+<li><strong>自动化程度提升</strong>：从手工设计到自动生成</li>
+<li><strong>多模态融合</strong>：文本、图像、音频的统一处理</li>
+<li><strong>个性化定制</strong>：针对特定领域和用户的优化</li>
+<li><strong>效率优化</strong>：在保证效果的前提下降低计算成本</li>
+</ol>
+<hr>
+<h2 id="核心提示技术详解"><a href="#核心提示技术详解" class="headerlink" title="核心提示技术详解"></a>核心提示技术详解</h2><h3 id="1-零样本提示（Zero-Shot-Prompting）"><a href="#1-零样本提示（Zero-Shot-Prompting）" class="headerlink" title="1. 零样本提示（Zero-Shot Prompting）"></a><span id="1">1. 零样本提示（Zero-Shot Prompting）</span></h3><p>零样本提示是最基础的提示技术，不提供任何示例，直接描述任务要求。</p>
+<h4 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h4><p>利用大语言模型的预训练知识，通过清晰的任务描述引导模型完成任务。</p>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>简单的分类任务</li>
+<li>基础的文本生成</li>
+<li>常见的问答场景</li>
+<li>快速原型验证</li>
+</ul>
+<h4 id="实践示例"><a href="#实践示例" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>文本分类：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">请判断以下评论的情感倾向，回答&quot;正面&quot;、&quot;负面&quot;或&quot;中性&quot;：</span><br><span class="line"></span><br><span class="line">评论：&quot;这个产品的质量真的很不错，值得推荐！&quot;</span><br><span class="line"></span><br><span class="line">情感倾向：</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码解释：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">请解释以下 JavaScript 代码的功能：</span><br><span class="line"></span><br><span class="line">function debounce(func, wait) &#123;</span><br><span class="line">  let timeout;</span><br><span class="line">  return function executedFunction(...args) &#123;</span><br><span class="line">    const later = () =&gt; &#123;</span><br><span class="line">      clearTimeout(timeout);</span><br><span class="line">      func(...args);</span><br><span class="line">    &#125;;</span><br><span class="line">    clearTimeout(timeout);</span><br><span class="line">    timeout = setTimeout(later, wait);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化技巧"><a href="#优化技巧" class="headerlink" title="优化技巧"></a>优化技巧</h4><ol>
+<li><strong>明确任务边界</strong>：清晰定义输入输出格式</li>
+<li><strong>使用动作词汇</strong>：”分析”、”总结”、”判断”等</li>
+<li><strong>设置约束条件</strong>：限制输出长度和格式</li>
+</ol>
+<h3 id="2-少样本提示（Few-Shot-Prompting）"><a href="#2-少样本提示（Few-Shot-Prompting）" class="headerlink" title="2. 少样本提示（Few-Shot Prompting）"></a><span id="2">2. 少样本提示（Few-Shot Prompting）</span></h3><p>通过提供少量示例来指导模型理解任务模式和期望输出格式。</p>
+<h4 id="核心原理-1"><a href="#核心原理-1" class="headerlink" title="核心原理"></a>核心原理</h4><p>利用模型的上下文学习能力，通过示例演示任务的输入输出模式。</p>
+<h4 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>特定格式的文本生成</li>
+<li>复杂的分类任务</li>
+<li>风格化写作</li>
+<li>结构化数据提取</li>
+</ul>
+<h4 id="实践示例-1"><a href="#实践示例-1" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>情感分析（3-shot）：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">请分析以下评论的情感倾向：</span><br><span class="line"></span><br><span class="line">示例1：</span><br><span class="line">评论：&quot;这家餐厅的服务态度很好，菜品也很美味。&quot;</span><br><span class="line">情感：正面</span><br><span class="line"></span><br><span class="line">示例2：</span><br><span class="line">评论：&quot;等了一个小时才上菜，而且味道一般。&quot;</span><br><span class="line">情感：负面</span><br><span class="line"></span><br><span class="line">示例3：</span><br><span class="line">评论：&quot;价格适中，环境还可以。&quot;</span><br><span class="line">情感：中性</span><br><span class="line"></span><br><span class="line">现在请分析：</span><br><span class="line">评论：&quot;食物新鲜，服务员很热情，下次还会再来。&quot;</span><br><span class="line">情感：</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码注释生成：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">为以下函数添加详细的注释：</span><br><span class="line"></span><br><span class="line">示例1：</span><br><span class="line">输入：</span><br><span class="line">function add(a, b) &#123;</span><br><span class="line">  return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">/**</span><br><span class="line"> * 计算两个数的和</span><br><span class="line"> * @param &#123;number&#125; a - 第一个数</span><br><span class="line"> * @param &#123;number&#125; b - 第二个数</span><br><span class="line"> * @returns &#123;number&#125; 两数之和</span><br><span class="line"> */</span><br><span class="line">function add(a, b) &#123;</span><br><span class="line">  return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">现在请为以下函数添加注释：</span><br><span class="line">function fibonacci(n) &#123;</span><br><span class="line">  if (n &lt;= 1) return n;</span><br><span class="line">  return fibonacci(n - 1) + fibonacci(n - 2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例选择策略"><a href="#示例选择策略" class="headerlink" title="示例选择策略"></a>示例选择策略</h4><ol>
+<li><strong>多样性</strong>：覆盖不同的输入类型</li>
+<li><strong>代表性</strong>：选择典型的正负例</li>
+<li><strong>渐进性</strong>：从简单到复杂的示例排序</li>
+<li><strong>平衡性</strong>：各类别示例数量均衡</li>
+</ol>
+<h3 id="3-链式思考（Chain-of-Thought-CoT）提示"><a href="#3-链式思考（Chain-of-Thought-CoT）提示" class="headerlink" title="3. 链式思考（Chain-of-Thought, CoT）提示"></a><span id="3">3. 链式思考（Chain-of-Thought, CoT）提示</span></h3><p>CoT 是目前最重要的提示技术之一，通过展示推理过程来提升模型的逻辑推理能力。</p>
+<h4 id="核心原理-2"><a href="#核心原理-2" class="headerlink" title="核心原理"></a>核心原理</h4><p>引导模型逐步展示思考过程，将复杂问题分解为多个简单步骤。</p>
+<h4 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>数学计算和逻辑推理</li>
+<li>复杂问题分析</li>
+<li>多步骤任务执行</li>
+<li>需要解释推理过程的场景</li>
+</ul>
+<h4 id="实践示例-2"><a href="#实践示例-2" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>数学推理：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">请解决以下数学问题，并展示详细的推理过程：</span><br><span class="line"></span><br><span class="line">问题：一个班级有 30 名学生，其中 60% 是女生。如果新转来 5 名男生，那么女生占总人数的百分比是多少？</span><br><span class="line"></span><br><span class="line">让我一步步分析：</span><br><span class="line">1. 首先计算原来女生的人数：30 × 60% = 18 名女生</span><br><span class="line">2. 原来男生的人数：30 - 18 = 12 名男生</span><br><span class="line">3. 新转来 5 名男生后，男生总数：12 + 5 = 17 名男生</span><br><span class="line">4. 总人数变为：30 + 5 = 35 名学生</span><br><span class="line">5. 女生人数不变，仍为 18 名</span><br><span class="line">6. 女生占总人数的百分比：18 ÷ 35 = 0.514 ≈ 51.4%</span><br><span class="line"></span><br><span class="line">答案：女生占总人数的 51.4%</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码调试：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">请分析以下代码的问题并提供修复方案：</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_average</span>(<span class="params">numbers</span>):</span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">        total += num</span><br><span class="line">    <span class="keyword">return</span> total / <span class="built_in">len</span>(numbers)</span><br><span class="line"></span><br><span class="line">result = calculate_average([])</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+
+<p>让我逐步分析这个问题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. **问题识别**：当传入空列表时，`len(numbers)` 为 0</span></span><br><span class="line"><span class="comment"># 2. **错误原因**：除零操作会导致 `ZeroDivisionError`</span></span><br><span class="line"><span class="comment"># 3. **解决思路**：需要在计算前检查列表是否为空</span></span><br><span class="line"><span class="comment"># 4. **修复方案**：</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_average</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> numbers:  <span class="comment"># 检查列表是否为空</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 或者抛出异常，根据业务需求决定</span></span><br><span class="line"></span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">        total += num</span><br><span class="line">    <span class="keyword">return</span> total / <span class="built_in">len</span>(numbers)</span><br><span class="line"><span class="comment"># 5. **进一步优化**：可以使用内置函数简化代码</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_average</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> numbers:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(numbers) / <span class="built_in">len</span>(numbers)</span><br></pre></td></tr></table></figure>
+
+<h4 id="CoT-变体技术"><a href="#CoT-变体技术" class="headerlink" title="CoT 变体技术"></a>CoT 变体技术</h4><p><strong>自动 CoT（Auto-CoT）：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">请解决这个问题。在回答之前，先说&quot;让我想想...&quot;，然后逐步分析：</span><br><span class="line"></span><br><span class="line">问题：如果一个正方形的对角线长度是 10cm，那么这个正方形的面积是多少？</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>零样本 CoT：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">问题：[复杂问题]</span><br><span class="line"></span><br><span class="line">请一步步思考并解决这个问题。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-自我一致性（Self-Consistency）"><a href="#4-自我一致性（Self-Consistency）" class="headerlink" title="4. 自我一致性（Self-Consistency）"></a><span id="4">4. 自我一致性（Self-Consistency）</span></h3><p>通过多次采样和投票机制提高推理结果的可靠性。</p>
+<h4 id="核心原理-3"><a href="#核心原理-3" class="headerlink" title="核心原理"></a>核心原理</h4><p>对同一问题进行多次推理，然后选择最一致的答案作为最终结果。</p>
+<h4 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>高准确性要求的推理任务</li>
+<li>数学计算验证</li>
+<li>重要决策支持</li>
+<li>不确定性较高的问题</li>
+</ul>
+<h4 id="实践示例-3"><a href="#实践示例-3" class="headerlink" title="实践示例"></a>实践示例</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">问题：一个圆形花园的半径是 5 米，如果要在花园周围铺设 2 米宽的小径，那么小径的面积是多少？</span><br><span class="line"></span><br><span class="line">推理路径 1：</span><br><span class="line"></span><br><span class="line">1. 原花园面积：π × 5² = 25π 平方米</span><br><span class="line">2. 加上小径后的总半径：5 + 2 = 7 米</span><br><span class="line">3. 总面积：π × 7² = 49π 平方米</span><br><span class="line">4. 小径面积：49π - 25π = 24π ≈ 75.4 平方米</span><br><span class="line"></span><br><span class="line">推理路径 2：</span><br><span class="line"></span><br><span class="line">1. 小径形成一个环形区域</span><br><span class="line">2. 外圆半径：5 + 2 = 7 米</span><br><span class="line">3. 内圆半径：5 米</span><br><span class="line">4. 环形面积：π(7² - 5²) = π(49 - 25) = 24π ≈ 75.4 平方米</span><br><span class="line"></span><br><span class="line">推理路径 3：</span><br><span class="line"></span><br><span class="line">1. 可以将小径看作外圆减去内圆</span><br><span class="line">2. 外圆面积：π × (5+2)² = π × 49 = 49π</span><br><span class="line">3. 内圆面积：π × 5² = 25π</span><br><span class="line">4. 小径面积：49π - 25π = 24π ≈ 75.4 平方米</span><br><span class="line"></span><br><span class="line">一致性检查：三种推理路径都得到相同答案 24π ≈ 75.4 平方米</span><br><span class="line">最终答案：小径的面积是 24π 平方米，约 75.4 平方米</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="实现策略"><a href="#实现策略" class="headerlink" title="实现策略"></a>实现策略</h4><ol>
+<li><strong>多路径推理</strong>：设计 3-5 种不同的推理路径</li>
+<li><strong>结果聚合</strong>：使用投票或加权平均</li>
+<li><strong>一致性评估</strong>：计算结果的一致性程度</li>
+<li><strong>置信度评估</strong>：根据一致性给出置信度</li>
+</ol>
+<h3 id="5-生成知识提示（Generated-Knowledge-Prompting）"><a href="#5-生成知识提示（Generated-Knowledge-Prompting）" class="headerlink" title="5. 生成知识提示（Generated Knowledge Prompting）"></a><span id="5">5. 生成知识提示（Generated Knowledge Prompting）</span></h3><p>先让模型生成相关知识，再基于这些知识回答问题。</p>
+<h4 id="核心原理-4"><a href="#核心原理-4" class="headerlink" title="核心原理"></a>核心原理</h4><p>将任务分为两个阶段：知识生成和知识应用。</p>
+<h4 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>需要背景知识的问题</li>
+<li>常识推理任务</li>
+<li>专业领域问答</li>
+<li>教育和解释性任务</li>
+</ul>
+<h4 id="实践示例-4"><a href="#实践示例-4" class="headerlink" title="实践示例"></a>实践示例</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">问题：为什么深海鱼类通常体色较暗？</span><br><span class="line"></span><br><span class="line">第一步 - 生成相关知识：</span><br><span class="line">请先生成关于深海环境和鱼类适应性的相关知识：</span><br><span class="line"></span><br><span class="line">相关知识：</span><br><span class="line"></span><br><span class="line">1. 深海环境特点：光线极少或完全没有阳光，水压极高，温度较低</span><br><span class="line">2. 鱼类体色的生物学意义：保护色、警戒色、求偶色等</span><br><span class="line">3. 深海生物的适应性进化：为了在特定环境中生存而发生的进化变化</span><br><span class="line">4. 光线与体色的关系：在光线充足的环境中，鲜艳的体色有助于交流和伪装</span><br><span class="line">5. 深海食物链：深海环境中的捕食关系和生存策略</span><br><span class="line"></span><br><span class="line">第二步 - 基于知识回答问题：</span><br><span class="line">基于上述知识，深海鱼类体色较暗的原因包括：</span><br><span class="line"></span><br><span class="line">1. **环境适应**：深海缺乏阳光，暗色有助于在黑暗环境中隐蔽</span><br><span class="line">2. **捕食策略**：暗色帮助它们在捕食时不被猎物发现</span><br><span class="line">3. **防御机制**：暗色使它们在面对捕食者时更难被发现</span><br><span class="line">4. **能量节约**：不需要维持鲜艳体色所需的额外能量消耗</span><br><span class="line">5. **进化选择**：在深海环境中，暗色个体具有生存优势，经过长期进化选择形成</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-提示链（Prompt-Chaining）"><a href="#6-提示链（Prompt-Chaining）" class="headerlink" title="6. 提示链（Prompt Chaining）"></a><span id="6">6. 提示链（Prompt Chaining）</span></h3><p>将复杂任务分解为多个简单的子任务，通过链式调用完成整体目标。</p>
+<h4 id="核心原理-5"><a href="#核心原理-5" class="headerlink" title="核心原理"></a>核心原理</h4><p>每个提示专注于一个特定的子任务，前一个提示的输出作为下一个提示的输入。</p>
+<h4 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>复杂的多步骤任务</li>
+<li>需要不同专业技能的综合任务</li>
+<li>质量控制要求高的任务</li>
+<li>可并行处理的任务</li>
+</ul>
+<h4 id="实践示例-5"><a href="#实践示例-5" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>文章写作流程：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">任务：写一篇关于&quot;人工智能在教育中的应用&quot;的技术文章</span><br><span class="line"></span><br><span class="line">第一步 - 大纲生成：</span><br><span class="line">请为&quot;人工智能在教育中的应用&quot;这个主题生成一个详细的文章大纲，包括：</span><br><span class="line"></span><br><span class="line">- 引言</span><br><span class="line">- 3-4 个主要章节</span><br><span class="line">- 每个章节的 2-3 个子点</span><br><span class="line">- 结论</span><br><span class="line"></span><br><span class="line">第二步 - 引言写作：</span><br><span class="line">基于以下大纲，请写一个引人入胜的引言（200-300 字）：</span><br><span class="line">[插入第一步生成的大纲]</span><br><span class="line"></span><br><span class="line">第三步 - 主体内容：</span><br><span class="line">请基于大纲的第一个主要章节，写出详细内容（500-800 字）：</span><br><span class="line">[插入具体章节要求]</span><br><span class="line"></span><br><span class="line">第四步 - 案例补充：</span><br><span class="line">请为上述内容添加 2-3 个具体的应用案例，每个案例包括：</span><br><span class="line"></span><br><span class="line">- 应用场景</span><br><span class="line">- 技术实现</span><br><span class="line">- 效果评估</span><br><span class="line"></span><br><span class="line">第五步 - 总结优化：</span><br><span class="line">请基于以上所有内容，写一个总结性的结论段落，并提出未来发展趋势。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="链式设计原则"><a href="#链式设计原则" class="headerlink" title="链式设计原则"></a>链式设计原则</h4><ol>
+<li><strong>单一职责</strong>：每个环节只处理一个明确的任务</li>
+<li><strong>清晰接口</strong>：定义好输入输出格式</li>
+<li><strong>错误处理</strong>：设计异常情况的处理机制</li>
+<li><strong>质量检查</strong>：在关键节点添加验证步骤</li>
+</ol>
+<h3 id="7-思维树（Tree-of-Thoughts-ToT）"><a href="#7-思维树（Tree-of-Thoughts-ToT）" class="headerlink" title="7. 思维树（Tree of Thoughts, ToT）"></a><span id="7">7. 思维树（Tree of Thoughts, ToT）</span></h3><p>ToT 是 CoT 的高级版本，通过树状搜索探索多种可能的推理路径。</p>
+<h4 id="核心原理-6"><a href="#核心原理-6" class="headerlink" title="核心原理"></a>核心原理</h4><p>将问题求解过程建模为搜索树，每个节点代表一个中间思考状态，通过广度优先或深度优先搜索找到最优解。</p>
+<h4 id="适用场景-6"><a href="#适用场景-6" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>需要探索多种可能性的创意任务</li>
+<li>复杂的逻辑推理问题</li>
+<li>策略规划和决策制定</li>
+<li>需要回溯和优化的问题</li>
+</ul>
+<h4 id="实践示例-6"><a href="#实践示例-6" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>24 点游戏求解：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">问题：使用数字 4, 1, 8, 7，通过加减乘除运算（每个数字只能用一次），得到结果 24。</span><br><span class="line"></span><br><span class="line">思维树搜索过程：</span><br><span class="line"></span><br><span class="line">根节点：[4, 1, 8, 7] 目标：24</span><br><span class="line"></span><br><span class="line">第一层分支（选择两个数字进行运算）：</span><br><span class="line">├── 分支 1：4 + 1 = 5，剩余 [5, 8, 7]</span><br><span class="line">├── 分支 2：4 - 1 = 3，剩余 [3, 8, 7]</span><br><span class="line">├── 分支 3：4 × 1 = 4，剩余 [4, 8, 7]</span><br><span class="line">├── 分支 4：4 ÷ 1 = 4，剩余 [4, 8, 7]</span><br><span class="line">├── 分支 5：8 - 7 = 1，剩余 [4, 1, 1]</span><br><span class="line">├── 分支 6：8 × 7 = 56，剩余 [4, 1, 56]</span><br><span class="line">└── ...</span><br><span class="line"></span><br><span class="line">第二层分支（以分支 1 为例）：</span><br><span class="line">分支 1：[5, 8, 7]</span><br><span class="line">├── 5 + 8 = 13，剩余 [13, 7]</span><br><span class="line">├── 5 × 8 = 40，剩余 [40, 7]</span><br><span class="line">├── 8 - 7 = 1，剩余 [5, 1]</span><br><span class="line">└── 8 × 7 = 56，剩余 [5, 56]</span><br><span class="line"></span><br><span class="line">第三层分支（继续搜索）：</span><br><span class="line">从 [5, 1] 分支：</span><br><span class="line"></span><br><span class="line">- 5 × 1 = 5 ≠ 24 ❌</span><br><span class="line">- 5 + 1 = 6 ≠ 24 ❌</span><br><span class="line"></span><br><span class="line">从 [40, 7] 分支：</span><br><span class="line"></span><br><span class="line">- 40 - 7 = 33 ≠ 24 ❌</span><br><span class="line">- 40 + 7 = 47 ≠ 24 ❌</span><br><span class="line"></span><br><span class="line">继续搜索其他分支...</span><br><span class="line"></span><br><span class="line">找到解决方案：</span><br><span class="line">(8 - 4) × (7 - 1) = 4 × 6 = 24 ✅</span><br><span class="line"></span><br><span class="line">验证：使用了所有数字 [8, 4, 7, 1]，结果为 24</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="ToT-实现框架"><a href="#ToT-实现框架" class="headerlink" title="ToT 实现框架"></a>ToT 实现框架</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">思维树搜索框架：</span><br><span class="line"></span><br><span class="line">1. **状态表示**：定义问题的中间状态</span><br><span class="line">2. **动作生成**：从当前状态生成可能的下一步动作</span><br><span class="line">3. **状态评估**：评估每个状态的价值或可行性</span><br><span class="line">4. **搜索策略**：选择广度优先、深度优先或启发式搜索</span><br><span class="line">5. **剪枝策略**：排除明显不可行的分支</span><br><span class="line">6. **终止条件**：定义何时找到解或停止搜索</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="8-检索增强生成（Retrieval-Augmented-Generation-RAG）"><a href="#8-检索增强生成（Retrieval-Augmented-Generation-RAG）" class="headerlink" title="8. 检索增强生成（Retrieval-Augmented Generation, RAG）"></a><span id="8">8. 检索增强生成（Retrieval-Augmented Generation, RAG）</span></h3><p>RAG 是当前最重要的企业级 AI 应用技术，通过外部知识库增强模型的知识能力。</p>
+<h4 id="核心原理-7"><a href="#核心原理-7" class="headerlink" title="核心原理"></a>核心原理</h4><p>结合信息检索和文本生成，先从知识库中检索相关信息，再基于检索结果生成答案。</p>
+<h4 id="适用场景-7"><a href="#适用场景-7" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>企业知识问答系统</li>
+<li>实时信息查询</li>
+<li>专业领域咨询</li>
+<li>文档智能分析</li>
+</ul>
+<h4 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">用户问题 → 问题理解 → 向量检索 → 相关文档 → 答案生成 → 用户</span><br><span class="line">↓ ↓ ↓ ↓ ↓</span><br><span class="line">NLP 处理 嵌入向量 向量数据库 上下文构建 LLM 生成</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="实践示例-7"><a href="#实践示例-7" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>企业内部知识问答：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">用户问题：&quot;公司的年假政策是什么？&quot;</span><br><span class="line"></span><br><span class="line">第一步 - 检索相关文档：</span><br><span class="line">从企业知识库中检索到以下相关内容：</span><br><span class="line"></span><br><span class="line">文档 1：《员工手册 - 假期政策》</span><br><span class="line">&quot;根据公司政策，正式员工享有以下年假待遇：</span><br><span class="line"></span><br><span class="line">- 工作满 1 年：5 天年假</span><br><span class="line">- 工作满 3 年：10 天年假</span><br><span class="line">- 工作满 5 年：15 天年假</span><br><span class="line">- 工作满 10 年：20 天年假&quot;</span><br><span class="line"></span><br><span class="line">文档 2：《HR 政策更新通知》</span><br><span class="line">&quot;自 2024 年 1 月 1 日起，年假政策调整如下：</span><br><span class="line"></span><br><span class="line">- 新员工入职满 6 个月即可享受按比例的年假</span><br><span class="line">- 年假可跨年使用，但需在次年 6 月前使用完毕&quot;</span><br><span class="line"></span><br><span class="line">第二步 - 基于检索结果生成答案：</span><br><span class="line">基于检索到的公司政策文档，我来为您详细介绍年假政策：</span><br><span class="line"></span><br><span class="line">**年假天数标准：**</span><br><span class="line"></span><br><span class="line">- 工作满 1 年：5 天年假</span><br><span class="line">- 工作满 3 年：10 天年假</span><br><span class="line">- 工作满 5 年：15 天年假</span><br><span class="line">- 工作满 10 年：20 天年假</span><br><span class="line"></span><br><span class="line">**重要更新（2024 年 1 月 1 日生效）：**</span><br><span class="line"></span><br><span class="line">- 新员工入职满 6 个月即可按比例享受年假</span><br><span class="line">- 年假可以跨年使用，但必须在次年 6 月前使用完毕</span><br><span class="line"></span><br><span class="line">如需了解更多详细信息或有特殊情况，建议您联系 HR 部门进行确认。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="RAG-优化策略"><a href="#RAG-优化策略" class="headerlink" title="RAG 优化策略"></a>RAG 优化策略</h4><ol>
+<li><p><strong>文档预处理</strong>：</p>
+<ul>
+<li>文档分块策略</li>
+<li>元数据提取</li>
+<li>质量过滤</li>
+</ul>
+</li>
+<li><p><strong>检索优化</strong>：</p>
+<ul>
+<li>混合检索（向量+关键词）</li>
+<li>查询重写</li>
+<li>多轮检索</li>
+</ul>
+</li>
+<li><p><strong>生成优化</strong>：</p>
+<ul>
+<li>上下文排序</li>
+<li>答案验证</li>
+<li>引用标注</li>
+</ul>
+</li>
+</ol>
+<h3 id="9-ReAct-框架（Reasoning-and-Acting）"><a href="#9-ReAct-框架（Reasoning-and-Acting）" class="headerlink" title="9. ReAct 框架（Reasoning and Acting）"></a><span id="9">9. ReAct 框架（Reasoning and Acting）</span></h3><p>ReAct 结合推理和行动，让模型能够使用外部工具来解决复杂问题。</p>
+<h4 id="核心原理-8"><a href="#核心原理-8" class="headerlink" title="核心原理"></a>核心原理</h4><p>交替进行推理（Reasoning）和行动（Acting），通过工具调用获取信息，再基于信息进行推理。</p>
+<h4 id="适用场景-8"><a href="#适用场景-8" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>需要实时信息的任务</li>
+<li>复杂计算问题</li>
+<li>多工具协作任务</li>
+<li>AI Agent 开发</li>
+</ul>
+<h4 id="实践示例-8"><a href="#实践示例-8" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>股票分析任务：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">用户问题：&quot;分析一下苹果公司（AAPL）最近的股价表现，并给出投资建议。&quot;</span><br><span class="line"></span><br><span class="line">ReAct 执行过程：</span><br><span class="line"></span><br><span class="line">思考 1：我需要获取苹果公司最近的股价数据来进行分析。</span><br><span class="line">行动 1：调用股价查询工具</span><br><span class="line">工具调用：get_stock_price(&quot;AAPL&quot;, period=&quot;1M&quot;)</span><br><span class="line">观察 1：获得苹果公司过去一个月的股价数据：</span><br><span class="line"></span><br><span class="line">- 当前价格：$150.25</span><br><span class="line">- 月初价格：$145.80</span><br><span class="line">- 最高价：$155.30</span><br><span class="line">- 最低价：$142.50</span><br><span class="line">- 涨跌幅：+3.05%</span><br><span class="line"></span><br><span class="line">思考 2：我还需要了解相关的财务指标和市场新闻来做全面分析。</span><br><span class="line">行动 2：调用财务指标查询工具</span><br><span class="line">工具调用：get_financial_metrics(&quot;AAPL&quot;)</span><br><span class="line">观察 2：获得财务指标：</span><br><span class="line"></span><br><span class="line">- P/E 比率：25.8</span><br><span class="line">- 市值：$2.45 万亿</span><br><span class="line">- 52 周最高：$198.23</span><br><span class="line">- 52 周最低：$124.17</span><br><span class="line"></span><br><span class="line">思考 3：让我查看最近的相关新闻，了解可能影响股价的因素。</span><br><span class="line">行动 3：调用新闻搜索工具</span><br><span class="line">工具调用：search_news(&quot;Apple AAPL stock&quot;, days=7)</span><br><span class="line">观察 3：最近新闻摘要：</span><br><span class="line"></span><br><span class="line">- 苹果发布新款 iPhone 销量超预期</span><br><span class="line">- 服务业务收入持续增长</span><br><span class="line">- 中国市场需求有所回暖</span><br><span class="line"></span><br><span class="line">思考 4：基于收集到的数据，我可以进行综合分析了。</span><br><span class="line"></span><br><span class="line">最终分析：</span><br><span class="line"></span><br><span class="line">**股价表现分析：**</span><br><span class="line">苹果公司过去一个月股价上涨 3.05%，表现稳健。当前价格$150.25 相对于 52 周高点有较大折扣空间。</span><br><span class="line"></span><br><span class="line">**基本面分析：**</span><br><span class="line"></span><br><span class="line">- P/E 比率 25.8 处于合理范围</span><br><span class="line">- 新产品销量超预期，显示产品竞争力</span><br><span class="line">- 服务业务增长为长期价值提供支撑</span><br><span class="line"></span><br><span class="line">**投资建议：**</span><br><span class="line"></span><br><span class="line">- 短期：谨慎乐观，可考虑逢低买入</span><br><span class="line">- 长期：基本面良好，适合长期持有</span><br><span class="line">- 风险：关注宏观经济和中美贸易关系变化</span><br><span class="line"></span><br><span class="line">_注：以上分析仅供参考，投资有风险，请谨慎决策。_</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="ReAct-设计模式"><a href="#ReAct-设计模式" class="headerlink" title="ReAct 设计模式"></a>ReAct 设计模式</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">while 任务未完成:</span><br><span class="line">思考：分析当前情况，确定下一步行动</span><br><span class="line">行动：调用工具或执行操作</span><br><span class="line">观察：分析行动结果</span><br><span class="line">if 获得足够信息:</span><br><span class="line">生成最终答案</span><br><span class="line">break</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Reflexion（反思框架）"><a href="#10-Reflexion（反思框架）" class="headerlink" title="10. Reflexion（反思框架）"></a><span id="10">10. Reflexion（反思框架）</span></h3><p>Reflexion 通过自我反思和迭代改进来提升任务执行质量。</p>
+<h4 id="核心原理-9"><a href="#核心原理-9" class="headerlink" title="核心原理"></a>核心原理</h4><p>执行任务后进行自我评估，识别错误和改进点，然后重新执行任务。</p>
+<h4 id="适用场景-9"><a href="#适用场景-9" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>高质量要求的创作任务</li>
+<li>复杂问题求解</li>
+<li>代码生成和调试</li>
+<li>学习和改进场景</li>
+</ul>
+<h4 id="实践示例-9"><a href="#实践示例-9" class="headerlink" title="实践示例"></a>实践示例</h4><p><strong>代码生成与优化：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">任务：实现一个高效的快速排序算法</span><br><span class="line"></span><br><span class="line">第一次尝试：</span><br><span class="line">def quicksort(arr):</span><br><span class="line">if len(arr) &lt;= 1:</span><br><span class="line">return arr</span><br><span class="line">pivot = arr[0]</span><br><span class="line">left = [x for x in arr[1:] if x &lt; pivot]</span><br><span class="line">right = [x for x in arr[1:] if x &gt;= pivot]</span><br><span class="line">return quicksort(left) + [pivot] + quicksort(right)</span><br><span class="line"></span><br><span class="line">自我反思：</span><br><span class="line">让我评估这个实现：</span><br><span class="line"></span><br><span class="line">优点：</span><br><span class="line"></span><br><span class="line">- 逻辑清晰，易于理解</span><br><span class="line">- 正确实现了快速排序的基本思想</span><br><span class="line"></span><br><span class="line">问题：</span><br><span class="line"></span><br><span class="line">1. 空间复杂度较高：每次递归都创建新的列表</span><br><span class="line">2. 基准选择策略简单：总是选择第一个元素，可能导致最坏情况</span><br><span class="line">3. 没有处理重复元素的优化</span><br><span class="line">4. 对于小数组，递归开销较大</span><br><span class="line"></span><br><span class="line">改进方案：</span><br><span class="line"></span><br><span class="line">1. 使用原地排序减少空间复杂度</span><br><span class="line">2. 实现三路快排处理重复元素</span><br><span class="line">3. 添加小数组的插入排序优化</span><br><span class="line">4. 改进基准选择策略</span><br><span class="line"></span><br><span class="line">第二次尝试（改进版）：</span><br><span class="line">def quicksort_optimized(arr, low=0, high=None):</span><br><span class="line">if high is None:</span><br><span class="line">high = len(arr) - 1</span><br><span class="line"></span><br><span class="line">    # 小数组使用插入排序</span><br><span class="line">    if high - low &lt; 10:</span><br><span class="line">        insertion_sort(arr, low, high)</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    if low &lt; high:</span><br><span class="line">        # 三路快排</span><br><span class="line">        lt, gt = three_way_partition(arr, low, high)</span><br><span class="line">        quicksort_optimized(arr, low, lt - 1)</span><br><span class="line">        quicksort_optimized(arr, gt + 1, high)</span><br><span class="line"></span><br><span class="line">def three_way_partition(arr, low, high): # 三路划分：&lt; pivot, = pivot, &gt; pivot</span><br><span class="line">pivot = median_of_three(arr, low, high) # 改进的基准选择</span><br><span class="line">arr[low], arr[pivot] = arr[pivot], arr[low]</span><br><span class="line"></span><br><span class="line">    pivot_val = arr[low]</span><br><span class="line">    lt = low  # arr[low+1..lt] &lt; pivot</span><br><span class="line">    i = low + 1  # arr[lt+1..i-1] = pivot</span><br><span class="line">    gt = high + 1  # arr[gt..high] &gt; pivot</span><br><span class="line"></span><br><span class="line">    while i &lt; gt:</span><br><span class="line">        if arr[i] &lt; pivot_val:</span><br><span class="line">            lt += 1</span><br><span class="line">            arr[lt], arr[i] = arr[i], arr[lt]</span><br><span class="line">            i += 1</span><br><span class="line">        elif arr[i] &gt; pivot_val:</span><br><span class="line">            gt -= 1</span><br><span class="line">            arr[gt], arr[i] = arr[i], arr[gt]</span><br><span class="line">        else:</span><br><span class="line">            i += 1</span><br><span class="line"></span><br><span class="line">    arr[low], arr[lt] = arr[lt], arr[low]</span><br><span class="line">    return lt, gt</span><br><span class="line"></span><br><span class="line">再次反思：</span><br><span class="line">这个改进版本解决了之前的主要问题：</span><br><span class="line"></span><br><span class="line">- ✅ 原地排序，空间复杂度 O(log n)</span><br><span class="line">- ✅ 三路快排，高效处理重复元素</span><br><span class="line">- ✅ 小数组插入排序优化</span><br><span class="line">- ✅ 改进的基准选择策略</span><br><span class="line"></span><br><span class="line">性能提升：</span><br><span class="line"></span><br><span class="line">- 平均时间复杂度：O(n log n)</span><br><span class="line">- 最坏情况得到改善</span><br><span class="line">- 空间使用更高效</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Reflexion-循环"><a href="#Reflexion-循环" class="headerlink" title="Reflexion 循环"></a>Reflexion 循环</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 执行任务 → 2. 自我评估 → 3. 识别问题 → 4. 制定改进计划 → 5. 重新执行</span><br><span class="line">   ↑ ↓</span><br><span class="line">   ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="新兴技术前瞻"><a href="#新兴技术前瞻" class="headerlink" title="新兴技术前瞻"></a>新兴技术前瞻</h2><h3 id="多模态思维链提示"><a href="#多模态思维链提示" class="headerlink" title="多模态思维链提示"></a>多模态思维链提示</h3><p>结合文本、图像、音频等多种模态的推理能力。</p>
+<p><strong>应用示例：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">任务：分析这张图片中的交通状况并给出改善建议</span><br><span class="line"></span><br><span class="line">[图片：繁忙的十字路口]</span><br><span class="line"></span><br><span class="line">多模态分析：</span><br><span class="line"></span><br><span class="line">1. 视觉观察：图片显示十字路口车辆拥堵，行人较多</span><br><span class="line">2. 交通流分析：主干道车流量大，辅路车辆等待时间长</span><br><span class="line">3. 基础设施评估：信号灯配时可能不够合理</span><br><span class="line">4. 改善建议：</span><br><span class="line">   - 优化信号灯配时</span><br><span class="line">   - 增设右转专用道</span><br><span class="line">   - 考虑设置人行天桥</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于图的提示"><a href="#基于图的提示" class="headerlink" title="基于图的提示"></a>基于图的提示</h3><p>利用图结构表示复杂的关系和知识。</p>
+<p><strong>知识图谱推理：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实体关系图：</span><br><span class="line">苹果公司 --[CEO]--&gt; 蒂姆·库克</span><br><span class="line">苹果公司 --[产品]--&gt; iPhone</span><br><span class="line">iPhone --[操作系统]--&gt; iOS</span><br><span class="line">iOS --[开发语言]--&gt; Swift</span><br><span class="line"></span><br><span class="line">问题：苹果公司的 CEO 使用什么编程语言开发移动应用？</span><br><span class="line"></span><br><span class="line">推理路径：</span><br><span class="line">苹果公司 → CEO → 蒂姆·库克</span><br><span class="line">苹果公司 → 产品 → iPhone → 操作系统 → iOS → 开发语言 → Swift</span><br><span class="line"></span><br><span class="line">答案：虽然蒂姆·库克是苹果公司的 CEO，但他主要负责管理工作。</span><br><span class="line">苹果公司的移动应用主要使用 Swift 语言开发。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Meta-Prompting"><a href="#Meta-Prompting" class="headerlink" title="Meta-Prompting"></a>Meta-Prompting</h3><p>自动生成和优化提示词的技术。</p>
+<p><strong>自动提示词优化：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">原始提示词：&quot;翻译这段文本&quot;</span><br><span class="line"></span><br><span class="line">优化后的提示词：</span><br><span class="line">&quot;作为一名专业的技术翻译专家，请将以下英文技术文档翻译成中文，</span><br><span class="line">要求：</span><br><span class="line"></span><br><span class="line">1. 保持技术术语的准确性</span><br><span class="line">2. 语言流畅自然</span><br><span class="line">3. 保留原文的格式结构</span><br><span class="line">4. 对于专业术语，在首次出现时提供英文原文</span><br><span class="line"></span><br><span class="line">请翻译以下内容：</span><br><span class="line">[原文内容]&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="技术选择指南"><a href="#技术选择指南" class="headerlink" title="技术选择指南"></a>技术选择指南</h2><h3 id="根据任务类型选择技术"><a href="#根据任务类型选择技术" class="headerlink" title="根据任务类型选择技术"></a>根据任务类型选择技术</h3><p><strong>简单任务（准确率要求 &lt; 90%）：</strong></p>
+<ul>
+<li>首选：零样本提示</li>
+<li>备选：少样本提示</li>
+</ul>
+<p><strong>中等复杂任务（准确率要求 90-95%）：</strong></p>
+<ul>
+<li>首选：CoT + 少样本提示</li>
+<li>备选：自我一致性</li>
+</ul>
+<p><strong>复杂任务（准确率要求 &gt; 95%）：</strong></p>
+<ul>
+<li>首选：ToT + 自我一致性</li>
+<li>备选：Reflexion + RAG</li>
+</ul>
+<p><strong>实时信息任务：</strong></p>
+<ul>
+<li>首选：RAG</li>
+<li>备选：ReAct 框架</li>
+</ul>
+<p><strong>多步骤任务：</strong></p>
+<ul>
+<li>首选：Prompt Chaining</li>
+<li>备选：ReAct 框架</li>
+</ul>
+<h3 id="成本效益分析"><a href="#成本效益分析" class="headerlink" title="成本效益分析"></a>成本效益分析</h3><table>
+<thead>
+<tr>
+<th>技术</th>
+<th>Token 消耗</th>
+<th>时间成本</th>
+<th>开发成本</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>零样本</td>
+<td>低</td>
+<td>低</td>
+<td>低</td>
+<td>简单任务</td>
+</tr>
+<tr>
+<td>少样本</td>
+<td>中</td>
+<td>低</td>
+<td>中</td>
+<td>格式化任务</td>
+</tr>
+<tr>
+<td>CoT</td>
+<td>中</td>
+<td>中</td>
+<td>低</td>
+<td>推理任务</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>高</td>
+<td>中</td>
+<td>高</td>
+<td>知识密集型</td>
+</tr>
+<tr>
+<td>ToT</td>
+<td>极高</td>
+<td>高</td>
+<td>中</td>
+<td>复杂推理</td>
+</tr>
+</tbody></table>
+<h2 id="实践建议与最佳实践"><a href="#实践建议与最佳实践" class="headerlink" title="实践建议与最佳实践"></a>实践建议与最佳实践</h2><h3 id="技术组合策略"><a href="#技术组合策略" class="headerlink" title="技术组合策略"></a>技术组合策略</h3><ol>
+<li><strong>渐进式应用</strong>：从简单技术开始，逐步增加复杂度</li>
+<li><strong>混合使用</strong>：结合多种技术的优势</li>
+<li><strong>场景适配</strong>：根据具体需求选择合适的技术</li>
+<li><strong>持续优化</strong>：基于效果反馈调整策略</li>
+</ol>
+<h3 id="性能优化技巧"><a href="#性能优化技巧" class="headerlink" title="性能优化技巧"></a>性能优化技巧</h3><ol>
+<li><strong>缓存机制</strong>：对常见问题建立答案缓存</li>
+<li><strong>并行处理</strong>：利用多线程提升处理速度</li>
+<li><strong>模型选择</strong>：根据任务复杂度选择合适的模型</li>
+<li><strong>提示词复用</strong>：建立提示词模板库</li>
+</ol>
+<h3 id="质量保证措施"><a href="#质量保证措施" class="headerlink" title="质量保证措施"></a>质量保证措施</h3><ol>
+<li><strong>多重验证</strong>：使用多种方法验证结果</li>
+<li><strong>人工审核</strong>：关键任务增加人工检查环节</li>
+<li><strong>A&#x2F;B 测试</strong>：对比不同技术的效果</li>
+<li><strong>持续监控</strong>：建立质量监控体系</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>高级提示技术为我们提供了强大的工具来充分发挥大语言模型的潜力。从简单的零样本提示到复杂的 Reflexion 框架，每种技术都有其独特的价值和适用场景。</p>
+<h3 id="关键要点"><a href="#关键要点" class="headerlink" title="关键要点"></a>关键要点</h3><ol>
+<li><strong>技术选择</strong>：根据任务复杂度和准确率要求选择合适的技术</li>
+<li><strong>成本控制</strong>：平衡效果和成本，避免过度工程化</li>
+<li><strong>持续学习</strong>：跟上技术发展，及时采用新的方法</li>
+<li><strong>实践导向</strong>：通过实际项目积累经验和最佳实践</li>
+</ol>
+<h3 id="未来发展趋势"><a href="#未来发展趋势" class="headerlink" title="未来发展趋势"></a>未来发展趋势</h3><ol>
+<li><strong>自动化程度提升</strong>：更多的自动提示词生成和优化工具</li>
+<li><strong>多模态融合</strong>：文本、图像、音频的统一处理能力</li>
+<li><strong>个性化定制</strong>：针对特定用户和领域的定制化技术</li>
+<li><strong>效率优化</strong>：在保证效果的前提下降低计算成本</li>
+</ol>
+<p>掌握这些高级提示技术，将帮助你在 AI 时代构建更智能、更可靠的应用系统。在下一篇文章中，我们将探讨如何构建企业级的提示词管理系统和最佳实践框架。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://edon.website" rel="internal follow bookmark" hexo-seo="true" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践">Edon Wang(王艺栋)</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" rel="internal follow bookmark" hexo-seo="true" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践">http://edon.website/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noopener noreferer noreferrer external" hexo-seo="true" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://edon.website" target="_blank" rel="internal follow bookmark" hexo-seo="true" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践">Edon Wang's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/">提示词工程</a><a class="post-meta__tags" href="/tags/LLM/">LLM</a><a class="post-meta__tags" href="/tags/AI-%E5%BA%94%E7%94%A8/">AI 应用</a><a class="post-meta__tags" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF/">高级技术</a></div><div class="post-share"><div class="social-share" data-image="/images/default-cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则"><img class="cover" src="/images/default-cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" title="cover of next post" itemprop="image"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">提示词工程（一）：基本概念与设计原则</div></div><div class="info-2"><div class="info-item-1">随着大语言模型（LLM）的快速发展和广泛应用，如何高效地与 AI 进行交互成为了一项重要技能。提示词工程（Prompt Engineering）作为连接人类意图与 AI 能力的桥梁，正在成为每个技术从业者都应该掌握的核心技能。本文将系统介绍提示词工程的基本概念、设计原则和实践技巧。 什么是提示词工程提示词工程是设计和优化输入给大语言模型的文本指令的过程，目标是引导模型产生期望的输出结果。它不仅仅是简单的问答，而是一门结合了语言艺术、逻辑思维和技术理解的综合学科。 为什么提示词工程如此重要 效率提升：好的提示词能让 AI 一次性给出准确答案，避免反复调试 成本控制：减少无效的 API 调用，降低使用成本 质量保证：通过结构化的提示词设计，确保输出的一致性和可靠性 能力释放：充分发挥大语言模型的潜力，实现复杂任务的自动化  提示词的核心要素一个高质量的提示词通常包含以下几个关键要素： 1. 角色定义（Role）明确告诉 AI 它应该扮演什么角色，这有助于模型调用相关的知识和语言风格。 示例： 123你是一个资深的前端工程师，拥有 10 年的 React 开发经验...你是一个专业的技...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则"><img class="cover" src="/images/default-cover.png" alt="cover" title="cover" itemprop="image"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-19</div><div class="info-item-2">提示词工程（一）：基本概念与设计原则</div></div><div class="info-2"><div class="info-item-1">随着大语言模型（LLM）的快速发展和广泛应用，如何高效地与 AI 进行交互成为了一项重要技能。提示词工程（Prompt Engineering）作为连接人类意图与 AI 能力的桥梁，正在成为每个技术从业者都应该掌握的核心技能。本文将系统介绍提示词工程的基本概念、设计原则和实践技巧。 什么是提示词工程提示词工程是设计和优化输入给大语言模型的文本指令的过程，目标是引导模型产生期望的输出结果。它不仅仅是简单的问答，而是一门结合了语言艺术、逻辑思维和技术理解的综合学科。 为什么提示词工程如此重要 效率提升：好的提示词能让 AI 一次性给出准确答案，避免反复调试 成本控制：减少无效的 API 调用，降低使用成本 质量保证：通过结构化的提示词设计，确保输出的一致性和可靠性 能力释放：充分发挥大语言模型的潜力，实现复杂任务的自动化  提示词的核心要素一个高质量的提示词通常包含以下几个关键要素： 1. 角色定义（Role）明确告诉 AI 它应该扮演什么角色，这有助于模型调用相关的知识和语言风格。 示例： 123你是一个资深的前端工程师，拥有 10 年的 React 开发经验...你是一个专业的技...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar" title="avatar" itemprop="image"></div><div class="author-info-name">Edon Wang(王艺栋)</div><div class="author-info-description">你好，我是Edon Wang(王艺栋)，一名充满热情的开发者，在前端、WebGL、元宇宙和AR/VR领域有多年经验。欢迎来到我的博客！</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" href="mailto:wyd0617@qq.com"><i class="fas fa-envelope"></i><span>联系我</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:wyd0617@qq.com" target="_blank" title="邮箱"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/wyd1520866381" target="_blank" title="Github" rel="nofollow noopener noreferer noreferrer external" hexo-seo="true" alt="提示词工程（二）：高级提示技术与应用实践"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">WeChat: wyd1520866381<br>QQ: 1520866381</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E6%A8%AA%E8%AF%84%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">高级提示技术横评总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E5%AE%9E%E7%8E%B0%E9%9A%BE%E5%BA%A6%E5%AF%B9%E6%AF%94"><span class="toc-number">1.1.</span> <span class="toc-text">技术复杂度与实现难度对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E9%80%82%E7%94%A8%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">应用场景适用性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%B8%8E%E8%B5%84%E6%BA%90%E6%B6%88%E8%80%97%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.</span> <span class="toc-text">性能与资源消耗对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF%E4%B8%8E%E5%89%8D%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">技术发展趋势与前景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">核心提示技术详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9B%B6%E6%A0%B7%E6%9C%AC%E6%8F%90%E7%A4%BA%EF%BC%88Zero-Shot-Prompting%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1. 零样本提示（Zero-Shot Prompting）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.1.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.1.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="toc-number">2.1.4.</span> <span class="toc-text">优化技巧</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B0%91%E6%A0%B7%E6%9C%AC%E6%8F%90%E7%A4%BA%EF%BC%88Few-Shot-Prompting%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2. 少样本提示（Few-Shot Prompting）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%80%89%E6%8B%A9%E7%AD%96%E7%95%A5"><span class="toc-number">2.2.4.</span> <span class="toc-text">示例选择策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%93%BE%E5%BC%8F%E6%80%9D%E8%80%83%EF%BC%88Chain-of-Thought-CoT%EF%BC%89%E6%8F%90%E7%A4%BA"><span class="toc-number">2.3.</span> <span class="toc-text">3. 链式思考（Chain-of-Thought, CoT）提示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-2"><span class="toc-number">2.3.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">2.3.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CoT-%E5%8F%98%E4%BD%93%E6%8A%80%E6%9C%AF"><span class="toc-number">2.3.4.</span> <span class="toc-text">CoT 变体技术</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%87%AA%E6%88%91%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Self-Consistency%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">4. 自我一致性（Self-Consistency）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-3"><span class="toc-number">2.4.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-3"><span class="toc-number">2.4.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5"><span class="toc-number">2.4.4.</span> <span class="toc-text">实现策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%94%9F%E6%88%90%E7%9F%A5%E8%AF%86%E6%8F%90%E7%A4%BA%EF%BC%88Generated-Knowledge-Prompting%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">5. 生成知识提示（Generated Knowledge Prompting）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-4"><span class="toc-number">2.5.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-4"><span class="toc-number">2.5.3.</span> <span class="toc-text">实践示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%8F%90%E7%A4%BA%E9%93%BE%EF%BC%88Prompt-Chaining%EF%BC%89"><span class="toc-number">2.6.</span> <span class="toc-text">6. 提示链（Prompt Chaining）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-5"><span class="toc-number">2.6.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-5"><span class="toc-number">2.6.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-5"><span class="toc-number">2.6.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-number">2.6.4.</span> <span class="toc-text">链式设计原则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%80%9D%E7%BB%B4%E6%A0%91%EF%BC%88Tree-of-Thoughts-ToT%EF%BC%89"><span class="toc-number">2.7.</span> <span class="toc-text">7. 思维树（Tree of Thoughts, ToT）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-6"><span class="toc-number">2.7.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-6"><span class="toc-number">2.7.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-6"><span class="toc-number">2.7.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ToT-%E5%AE%9E%E7%8E%B0%E6%A1%86%E6%9E%B6"><span class="toc-number">2.7.4.</span> <span class="toc-text">ToT 实现框架</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%EF%BC%88Retrieval-Augmented-Generation-RAG%EF%BC%89"><span class="toc-number">2.8.</span> <span class="toc-text">8. 检索增强生成（Retrieval-Augmented Generation, RAG）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-7"><span class="toc-number">2.8.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-7"><span class="toc-number">2.8.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="toc-number">2.8.3.</span> <span class="toc-text">技术架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-7"><span class="toc-number">2.8.4.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RAG-%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-number">2.8.5.</span> <span class="toc-text">RAG 优化策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-ReAct-%E6%A1%86%E6%9E%B6%EF%BC%88Reasoning-and-Acting%EF%BC%89"><span class="toc-number">2.9.</span> <span class="toc-text">9. ReAct 框架（Reasoning and Acting）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-8"><span class="toc-number">2.9.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-8"><span class="toc-number">2.9.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-8"><span class="toc-number">2.9.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReAct-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.9.4.</span> <span class="toc-text">ReAct 设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Reflexion%EF%BC%88%E5%8F%8D%E6%80%9D%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="toc-number">2.10.</span> <span class="toc-text">10. Reflexion（反思框架）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-9"><span class="toc-number">2.10.1.</span> <span class="toc-text">核心原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-9"><span class="toc-number">2.10.2.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%A4%BA%E4%BE%8B-9"><span class="toc-number">2.10.3.</span> <span class="toc-text">实践示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reflexion-%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.10.4.</span> <span class="toc-text">Reflexion 循环</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%85%B4%E6%8A%80%E6%9C%AF%E5%89%8D%E7%9E%BB"><span class="toc-number">3.</span> <span class="toc-text">新兴技术前瞻</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E6%80%9D%E7%BB%B4%E9%93%BE%E6%8F%90%E7%A4%BA"><span class="toc-number">3.1.</span> <span class="toc-text">多模态思维链提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84%E6%8F%90%E7%A4%BA"><span class="toc-number">3.2.</span> <span class="toc-text">基于图的提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Meta-Prompting"><span class="toc-number">3.3.</span> <span class="toc-text">Meta-Prompting</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97"><span class="toc-number">4.</span> <span class="toc-text">技术选择指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%BB%BB%E5%8A%A1%E7%B1%BB%E5%9E%8B%E9%80%89%E6%8B%A9%E6%8A%80%E6%9C%AF"><span class="toc-number">4.1.</span> <span class="toc-text">根据任务类型选择技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%E5%88%86%E6%9E%90"><span class="toc-number">4.2.</span> <span class="toc-text">成本效益分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">5.</span> <span class="toc-text">实践建议与最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%84%E5%90%88%E7%AD%96%E7%95%A5"><span class="toc-number">5.1.</span> <span class="toc-text">技术组合策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="toc-number">5.2.</span> <span class="toc-text">性能优化技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E6%8E%AA%E6%96%BD"><span class="toc-number">5.3.</span> <span class="toc-text">质量保证措施</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A6%81%E7%82%B9"><span class="toc-number">6.1.</span> <span class="toc-text">关键要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF"><span class="toc-number">6.2.</span> <span class="toc-text">未来发展趋势</span></a></li></ol></li></ol></div></div><div class="card-widget card-post-series"><div class="item-headline"><i class="fa-solid fa-layer-group"></i><span>系列文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" title="提示词工程（二）：高级提示技术与应用实践"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" title="提示词工程（二）：高级提示技术与应用实践">提示词工程（二）：高级提示技术与应用实践</a><time datetime="2025-08-19T09:30:00.000Z" title="发表于 2025-08-19 17:30:00">2025-08-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提示词工程（一）：基本概念与设计原则" title="提示词工程（一）：基本概念与设计原则" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则">提示词工程（一）：基本概念与设计原则</a><time datetime="2025-08-19T09:00:00.000Z" title="发表于 2025-08-19 17:00:00">2025-08-19</time></div></div></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" title="提示词工程（二）：高级提示技术与应用实践"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" title="提示词工程（二）：高级提示技术与应用实践">提示词工程（二）：高级提示技术与应用实践</a><time datetime="2025-08-19T09:30:00.000Z" title="发表于 2025-08-19 17:30:00">2025-08-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提示词工程（一）：基本概念与设计原则" title="提示词工程（一）：基本概念与设计原则" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则">提示词工程（一）：基本概念与设计原则</a><time datetime="2025-08-19T09:00:00.000Z" title="发表于 2025-08-19 17:00:00">2025-08-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/18/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%BF%80%E5%8A%B1%E6%9C%BA%E5%88%B6%E4%B8%8E%E4%BA%BA%E6%89%8D%E6%88%90%E9%95%BF/" title="团队管理（五）：激励机制与人才成长"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="团队管理（五）：激励机制与人才成长" title="团队管理（五）：激励机制与人才成长" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/18/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%BF%80%E5%8A%B1%E6%9C%BA%E5%88%B6%E4%B8%8E%E4%BA%BA%E6%89%8D%E6%88%90%E9%95%BF/" title="团队管理（五）：激励机制与人才成长">团队管理（五）：激励机制与人才成长</a><time datetime="2025-08-18T02:30:00.000Z" title="发表于 2025-08-18 10:30:00">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80/" title="团队管理（四）：技术分享与知识沉淀"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="团队管理（四）：技术分享与知识沉淀" title="团队管理（四）：技术分享与知识沉淀" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/17/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80/" title="团队管理（四）：技术分享与知识沉淀">团队管理（四）：技术分享与知识沉淀</a><time datetime="2025-08-17T02:30:00.000Z" title="发表于 2025-08-17 10:30:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/23/Trae%E6%99%BA%E8%83%BD%E4%BD%93-Antd%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B8%AD%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E4%B8%93%E5%AE%B6/" title="Trae智能体-Antd全家桶中后台开发专家"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Trae智能体-Antd全家桶中后台开发专家" title="Trae智能体-Antd全家桶中后台开发专家" itemprop="image"></a><div class="content"><a class="title" href="/2025/07/23/Trae%E6%99%BA%E8%83%BD%E4%BD%93-Antd%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B8%AD%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E4%B8%93%E5%AE%B6/" title="Trae智能体-Antd全家桶中后台开发专家">Trae智能体-Antd全家桶中后台开发专家</a><time datetime="2025-07-23T06:15:50.000Z" title="发表于 2025-07-23 14:15:50">2025-07-23</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Edon Wang(王艺栋)</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow noopener noreferer noreferrer external" hexo-seo="true" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践">辽ICP备2025057989号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

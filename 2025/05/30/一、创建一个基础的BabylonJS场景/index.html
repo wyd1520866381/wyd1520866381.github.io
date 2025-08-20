@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>一、创建一个基础的BabylonJS场景 | Edon Wang's Blog</title><meta name="author" content="Edon Wang(王艺栋)"><meta name="copyright" content="Edon Wang(王艺栋)"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="第一幕：创建你的第一个 Babylon.js 场景现在是时候创建我们的场景并在屏幕上生成一些东西了。我们将以 Vite 项目为例，从零开始搭建一个基础的 Babylon.js 场景。 1. 创建 Vite 项目并安装 Babylon.js首先，我们需要创建一个 Vite 项目。打开你的终端，执行以下命令： 123npm create vite@latest my-babylonjs-app --">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一、创建一个基础的BabylonJS场景">
+<meta property="og:url" content="http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/index.html">
+<meta property="og:site_name" content="Edon Wang&#39;s Blog">
+<meta property="og:description" content="第一幕：创建你的第一个 Babylon.js 场景现在是时候创建我们的场景并在屏幕上生成一些东西了。我们将以 Vite 项目为例，从零开始搭建一个基础的 Babylon.js 场景。 1. 创建 Vite 项目并安装 Babylon.js首先，我们需要创建一个 Vite 项目。打开你的终端，执行以下命令： 123npm create vite@latest my-babylonjs-app --">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://edon.website/images/default-cover.png">
+<meta property="article:published_time" content="2025-05-30T04:14:27.000Z">
+<meta property="article:modified_time" content="2025-05-30T04:25:49.658Z">
+<meta property="article:author" content="Edon Wang(王艺栋)">
+<meta property="article:tag" content="BabylonJS">
+<meta property="article:tag" content="WebGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://edon.website/images/default-cover.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "一、创建一个基础的BabylonJS场景",
+  "url": "http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/",
+  "image": "http://edon.website/images/default-cover.png",
+  "datePublished": "2025-05-30T04:14:27.000Z",
+  "dateModified": "2025-05-30T04:25:49.658Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Edon Wang(王艺栋)",
+      "url": "http://edon.website"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/ico.ico"><link rel="canonical" href="http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1a1a')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: Edon Wang(王艺栋)","link":"链接: ","source":"来源: Edon Wang's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '一、创建一个基础的BabylonJS场景',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0">
+
+<script type="application/ld+json" id="hexo-seo-schema">[
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "http://edon.website",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "@id": "https://developers.google.com/search/docs/advanced/structured-data/sitelinks-searchbox",
+      "target": "http://www.edon.website{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://developers.google.com/search/docs/advanced/structured-data/breadcrumb",
+    "name": "breadcrumb",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": "http://edon.website/tags/BabylonJS/",
+        "name": "BabylonJS"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": "http://edon.website/tags/WebGL/",
+        "name": "WebGL"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": "http://edon.website/categories/%E5%89%8D%E7%AB%AF/",
+        "name": "前端"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": "http://edon.website/categories/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E5%BD%A2%E5%AD%A6/",
+        "name": "图形学"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": "http://edon.website/categories/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E5%BD%A2%E5%AD%A6/BabylonJS/",
+        "name": "BabylonJS"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": "http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/",
+        "name": "一、创建一个基础的BabylonJS场景"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org/",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/"
+    },
+    "headline": "一、创建一个基础的BabylonJS场景",
+    "description": "一、创建一个基础的BabylonJS场景",
+    "image": {
+      "@type": "ImageObject",
+      "url": "/images/default-cover.png",
+      "width": "250",
+      "height": "250"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Edon Wang(王艺栋)"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Edon Wang(王艺栋)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.webmanajemen.com/2022/01/04/frp-redmi-go-tiare-fix/Bypass%20FRP%20Redmi%20Go%20Tiare%20M1903C3GG.jpg",
+        "width": "125",
+        "height": "125"
+      }
+    },
+    "datePublished": "2025-05-30T12:14:27+08:00",
+    "dateModified": "2025-05-30T12:25:49+08:00"
+  }
+]</script>
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" ></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/styles/minimal.css"><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar" title="avatar" itemprop="image"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/default-cover.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Edon Wang's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">一、创建一个基础的BabylonJS场景</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">一、创建一个基础的BabylonJS场景</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-30T04:14:27.000Z" title="发表于 2025-05-30 12:14:27">2025-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-30T04:25:49.658Z" title="更新于 2025-05-30 12:25:49">2025-05-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E5%BD%A2%E5%AD%A6/">图形学</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E5%BD%A2%E5%AD%A6/BabylonJS/">BabylonJS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="第一幕：创建你的第一个-Babylon-js-场景"><a href="#第一幕：创建你的第一个-Babylon-js-场景" class="headerlink" title="第一幕：创建你的第一个 Babylon.js 场景"></a>第一幕：创建你的第一个 Babylon.js 场景</h2><p>现在是时候创建我们的场景并在屏幕上生成一些东西了。我们将以 Vite 项目为例，从零开始搭建一个基础的 Babylon.js 场景。</p>
+<h3 id="1-创建-Vite-项目并安装-Babylon-js"><a href="#1-创建-Vite-项目并安装-Babylon-js" class="headerlink" title="1. 创建 Vite 项目并安装 Babylon.js"></a>1. 创建 Vite 项目并安装 Babylon.js</h3><p>首先，我们需要创建一个 Vite 项目。打开你的终端，执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm create vite@latest my-babylonjs-app -- --template vanilla</span><br><span class="line"><span class="built_in">cd</span> my-babylonjs-app</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>接下来，安装 Babylon.js 库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @babylonjs/core @babylonjs/loaders</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-初始化场景要素"><a href="#2-初始化场景要素" class="headerlink" title="2. 初始化场景要素"></a>2. 初始化场景要素</h3><p>在<code>main.js</code>（或你选择的入口文件）中，我们需要引入 Babylon.js 并设置场景的核心要素：引擎、场景、相机和灯光。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  <span class="title class_">Engine</span>,</span><br><span class="line">  <span class="title class_">Scene</span>,</span><br><span class="line">  <span class="title class_">ArcRotateCamera</span>,</span><br><span class="line">  <span class="title class_">HemisphericLight</span>,</span><br><span class="line">  <span class="title class_">Vector3</span>,</span><br><span class="line">  <span class="title class_">MeshBuilder</span>,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;@babylonjs/core&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 HTML 中的 canvas 元素。在你的 index.html 中添加一个 canvas 标签：&lt;canvas id=&quot;renderCanvas&quot;&gt;&lt;/canvas&gt;</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;renderCanvas&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化 Babylon.js 引擎</span></span><br><span class="line"><span class="keyword">const</span> engine = <span class="keyword">new</span> <span class="title class_">Engine</span>(canvas, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建场景</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">createScene</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> scene = <span class="keyword">new</span> <span class="title class_">Scene</span>(engine);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建相机</span></span><br><span class="line">  <span class="comment">// ArcRotateCamera 是一种围绕目标旋转的相机，非常适合观察物体。</span></span><br><span class="line">  <span class="keyword">const</span> camera = <span class="keyword">new</span> <span class="title class_">ArcRotateCamera</span>(</span><br><span class="line">    <span class="string">&quot;camera&quot;</span>,</span><br><span class="line">    -<span class="title class_">Math</span>.<span class="property">PI</span> / <span class="number">2</span>,</span><br><span class="line">    <span class="title class_">Math</span>.<span class="property">PI</span> / <span class="number">2.5</span>,</span><br><span class="line">    <span class="number">3</span>,</span><br><span class="line">    <span class="title class_">Vector3</span>.<span class="title class_">Zero</span>(),</span><br><span class="line">    scene</span><br><span class="line">  );</span><br><span class="line">  camera.<span class="title function_">attachControl</span>(canvas, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建光源</span></span><br><span class="line">  <span class="comment">// HemisphericLight 是一种半球光，模拟环境光，没有明确的光源方向。</span></span><br><span class="line">  <span class="keyword">const</span> light = <span class="keyword">new</span> <span class="title class_">HemisphericLight</span>(<span class="string">&quot;light&quot;</span>, <span class="keyword">new</span> <span class="title class_">Vector3</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>), scene);</span><br><span class="line">  light.<span class="property">intensity</span> = <span class="number">0.7</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建一个球体</span></span><br><span class="line">  <span class="keyword">const</span> sphere = <span class="title class_">MeshBuilder</span>.<span class="title class_">CreateSphere</span>(<span class="string">&quot;sphere&quot;</span>, &#123; <span class="attr">diameter</span>: <span class="number">1</span> &#125;, scene);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 移动球体使其在地面上方</span></span><br><span class="line">  sphere.<span class="property">position</span>.<span class="property">y</span> = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建一个地面</span></span><br><span class="line">  <span class="keyword">const</span> ground = <span class="title class_">MeshBuilder</span>.<span class="title class_">CreateGround</span>(</span><br><span class="line">    <span class="string">&quot;ground&quot;</span>,</span><br><span class="line">    &#123; <span class="attr">width</span>: <span class="number">6</span>, <span class="attr">height</span>: <span class="number">6</span> &#125;,</span><br><span class="line">    scene</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> scene;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> scene = <span class="title function_">createScene</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 渲染循环</span></span><br><span class="line">engine.<span class="title function_">runRenderLoop</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  scene.<span class="title function_">render</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应窗口大小变化</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;resize&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  engine.<span class="title function_">resize</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-更新-index-html"><a href="#3-更新-index-html" class="headerlink" title="3. 更新 index.html"></a>3. 更新 <code>index.html</code></h3><p>在你的 <code>index.html</code> 文件中，确保有一个 <code>&lt;canvas&gt;</code> 元素，并且引入你的 JavaScript 文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Babylon.js Basic Scene<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">html</span>,</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-id">#renderCanvas</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">touch-action</span>: none;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;renderCanvas&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-运行你的应用"><a href="#4-运行你的应用" class="headerlink" title="4. 运行你的应用"></a>4. 运行你的应用</h3><p>在终端中运行 Vite 开发服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p>现在，你可以在浏览器中看到一个球体和一个地面，这就是你创建的第一个 Babylon.js 场景！</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上步骤，我们成功地创建了一个基础的 Babylon.js 场景，并了解了引擎、场景、相机和灯光这几个核心要素的作用。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://edon.website" rel="internal follow bookmark" hexo-seo="true" alt="一、创建一个基础的BabylonJS场景" title="一、创建一个基础的BabylonJS场景">Edon Wang(王艺栋)</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/" rel="internal follow bookmark" hexo-seo="true" alt="一、创建一个基础的BabylonJS场景" title="一、创建一个基础的BabylonJS场景">http://edon.website/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noopener noreferer noreferrer external" hexo-seo="true" alt="一、创建一个基础的BabylonJS场景" title="一、创建一个基础的BabylonJS场景">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://edon.website" target="_blank" rel="internal follow bookmark" hexo-seo="true" alt="一、创建一个基础的BabylonJS场景" title="一、创建一个基础的BabylonJS场景">Edon Wang's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/BabylonJS/">BabylonJS</a><a class="post-meta__tags" href="/tags/WebGL/">WebGL</a></div><div class="post-share"><div class="social-share" data-image="/images/default-cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/30/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F3D%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" title="微信小程序3D项目创建"><img class="cover" src="/images/default-cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post" title="cover of previous post" itemprop="image"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">微信小程序3D项目创建</div></div><div class="info-2"><div class="info-item-1">微信小程序 3D：原生框架与 H5 套壳的深度解析在微信小程序生态中，开发者面临着两种主流的 3D 实现路径：基于原生框架的 XR-Frame 与基于 H5 技术栈的套壳方案。理解两者的核心差异，对于选择最适合项目需求的技术方案至关重要。 原生 XR-Frame：性能与深度的融合微信小程序官方推出的 XR-Frame，是专为小程序环境量身打造的 XR&#x2F;3D 应用解决方案。它并非简单的 H5 封装，而是基于混合方案实现，旨在提供接近原生应用的性能体验。XR-Frame 的优势在于：  性能逼近原生：通过底层优化，XR-Frame 能够更高效地利用设备硬件资源，减少渲染延迟，提供流畅的 3D 交互体验。这对于对性能要求较高的复杂 3D 场景尤为关键。 深度集成：XR-Frame 与微信小程序生态系统深度融合，能够无缝调用小程序 API，实现更丰富的功能，例如与微信支付、用户数据、设备传感器等进行高效互动。 易用性与扩展性：XR-Frame 遵循小程序开发标准，降低了开发者的学习门槛。同时，其模块化的设计也提供了良好的扩展性，方便开发者根据需求定制功能。 官方支持与维护：作为...</div></div></div></a><a class="pagination-related" href="/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84ThreeJS%E5%9C%BA%E6%99%AF/" title="一、创建一个基础的ThreeJS场景"><img class="cover" src="/images/default-cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" title="cover of next post" itemprop="image"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">一、创建一个基础的ThreeJS场景</div></div><div class="info-2"><div class="info-item-1">第一幕：创建你的第一个 Three.js 场景现在是时候创建我们的场景并在屏幕上生成一些东西了。我们将以 Vite 项目为例，从零开始搭建一个基础的 Three.js 场景。 1. 创建 Vite 项目并安装 Three.js首先，我们需要创建一个 Vite 项目。打开你的终端，执行以下命令： 123npm create vite@latest my-threejs-app -- --template vanillacd my-threejs-appnpm install  接下来，安装 Three.js 库： 1npm install three  2. 初始化场景要素在main.js（或你选择的入口文件）中，我们需要引入 Three.js 并设置场景的四个核心要素：场景、对象、相机和渲染器。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/05/30/%E4%BB%80%E4%B9%88%E6%98%AFWebGL%E4%BB%A5%E5%8F%8A%E4%BB%80%E4%B9%88%E6%98%AFThree-BabylonJS/" title="什么是WebGL以及什么是Three\BabylonJS"><img class="cover" src="/images/default-cover.png" alt="cover" title="cover" itemprop="image"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-30</div><div class="info-item-2">什么是WebGL以及什么是Three\BabylonJS</div></div><div class="info-2"><div class="info-item-1">什么是 WebGL？WebGL（Web Graphics Library）是一种 JavaScript API，用于在任何兼容的 Web 浏览器中渲染交互式 2D 和 3D 图形，而无需使用插件。它通过引入一个与 OpenGL ES 2.0 兼容的 API，将 GPU 的强大功能带到 Web 上。这意味着开发者可以直接利用用户的显卡进行高性能的图形渲染，从而在浏览器中实现复杂的游戏、数据可视化、虚拟现实（VR）和增强现实（AR）应用。 WebGL 的核心是基于 OpenGL ES 2.0，它是一个低级的图形 API，直接操作 GPU。因此，使用 WebGL 进行开发需要对图形学概念有深入的理解，例如顶点、着色器（Shader）、纹理、矩阵变换等。直接使用 WebGL 编写代码通常会非常复杂和冗长。 什么是 Canvas？HTML &lt;canvas&gt; 元素用于在网页上绘制图形。它本身是一个空白的矩形区域，开发者可以使用 JavaScript 在其上绘制各种图形，包括 2D 图形和 3D 图形。当与 WebGL 结合使用时，&lt;canvas&gt; 元素就成为了 Web...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar" title="avatar" itemprop="image"></div><div class="author-info-name">Edon Wang(王艺栋)</div><div class="author-info-description">你好，我是Edon Wang(王艺栋)，一名充满热情的开发者，在前端、WebGL、元宇宙和AR/VR领域有多年经验。欢迎来到我的博客！</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" href="mailto:wyd0617@qq.com"><i class="fas fa-envelope"></i><span>联系我</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:wyd0617@qq.com" target="_blank" title="邮箱"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/wyd1520866381" target="_blank" title="Github" rel="nofollow noopener noreferer noreferrer external" hexo-seo="true" alt="一、创建一个基础的BabylonJS场景"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">WeChat: wyd1520866381<br>QQ: 1520866381</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%B9%95%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA-Babylon-js-%E5%9C%BA%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">第一幕：创建你的第一个 Babylon.js 场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA-Vite-%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%89%E8%A3%85-Babylon-js"><span class="toc-number">1.1.</span> <span class="toc-text">1. 创建 Vite 项目并安装 Babylon.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9C%BA%E6%99%AF%E8%A6%81%E7%B4%A0"><span class="toc-number">1.2.</span> <span class="toc-text">2. 初始化场景要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9B%B4%E6%96%B0-index-html"><span class="toc-number">1.3.</span> <span class="toc-text">3. 更新 index.html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">4. 运行你的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-post-series"><div class="item-headline"><i class="fa-solid fa-layer-group"></i><span>系列文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/" title="一、创建一个基础的BabylonJS场景"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一、创建一个基础的BabylonJS场景" title="一、创建一个基础的BabylonJS场景" itemprop="image"></a><div class="content"><a class="title" href="/2025/05/30/%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84BabylonJS%E5%9C%BA%E6%99%AF/" title="一、创建一个基础的BabylonJS场景">一、创建一个基础的BabylonJS场景</a><time datetime="2025-05-30T04:14:27.000Z" title="发表于 2025-05-30 12:14:27">2025-05-30</time></div></div></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" title="提示词工程（二）：高级提示技术与应用实践"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提示词工程（二）：高级提示技术与应用实践" title="提示词工程（二）：高级提示技术与应用实践" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8F%90%E7%A4%BA%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6/" title="提示词工程（二）：高级提示技术与应用实践">提示词工程（二）：高级提示技术与应用实践</a><time datetime="2025-08-19T09:30:00.000Z" title="发表于 2025-08-19 17:30:00">2025-08-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="提示词工程（一）：基本概念与设计原则" title="提示词工程（一）：基本概念与设计原则" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B-%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="提示词工程（一）：基本概念与设计原则">提示词工程（一）：基本概念与设计原则</a><time datetime="2025-08-19T09:00:00.000Z" title="发表于 2025-08-19 17:00:00">2025-08-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/18/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%BF%80%E5%8A%B1%E6%9C%BA%E5%88%B6%E4%B8%8E%E4%BA%BA%E6%89%8D%E6%88%90%E9%95%BF/" title="团队管理（五）：激励机制与人才成长"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="团队管理（五）：激励机制与人才成长" title="团队管理（五）：激励机制与人才成长" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/18/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%BF%80%E5%8A%B1%E6%9C%BA%E5%88%B6%E4%B8%8E%E4%BA%BA%E6%89%8D%E6%88%90%E9%95%BF/" title="团队管理（五）：激励机制与人才成长">团队管理（五）：激励机制与人才成长</a><time datetime="2025-08-18T02:30:00.000Z" title="发表于 2025-08-18 10:30:00">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/17/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80/" title="团队管理（四）：技术分享与知识沉淀"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="团队管理（四）：技术分享与知识沉淀" title="团队管理（四）：技术分享与知识沉淀" itemprop="image"></a><div class="content"><a class="title" href="/2025/08/17/%E5%9B%A2%E9%98%9F%E7%AE%A1%E7%90%86-%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80/" title="团队管理（四）：技术分享与知识沉淀">团队管理（四）：技术分享与知识沉淀</a><time datetime="2025-08-17T02:30:00.000Z" title="发表于 2025-08-17 10:30:00">2025-08-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/23/Trae%E6%99%BA%E8%83%BD%E4%BD%93-Antd%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B8%AD%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E4%B8%93%E5%AE%B6/" title="Trae智能体-Antd全家桶中后台开发专家"><img src="/images/default-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Trae智能体-Antd全家桶中后台开发专家" title="Trae智能体-Antd全家桶中后台开发专家" itemprop="image"></a><div class="content"><a class="title" href="/2025/07/23/Trae%E6%99%BA%E8%83%BD%E4%BD%93-Antd%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B8%AD%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E4%B8%93%E5%AE%B6/" title="Trae智能体-Antd全家桶中后台开发专家">Trae智能体-Antd全家桶中后台开发专家</a><time datetime="2025-07-23T06:15:50.000Z" title="发表于 2025-07-23 14:15:50">2025-07-23</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Edon Wang(王艺栋)</span></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow noopener noreferer noreferrer external" hexo-seo="true" alt="一、创建一个基础的BabylonJS场景" title="一、创建一个基础的BabylonJS场景">辽ICP备2025057989号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
