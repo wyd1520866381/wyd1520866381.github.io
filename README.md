@@ -250,3 +250,7 @@ MIT License
 **技术栈**: Hexo + Butterfly + GitHub Actions + Vercel
 
 **联系方式**: [关于页面](/about/)
+
+hexo seo-search
+
+hexo seo-feed
