@@ -100,7 +100,7 @@ aside:
   card_announcement:
     enable: true
     title: 联系方式
-    content: "WeChat: wyd1520866381<br>QQ: 1520866381"
+    content: "WeChat: wyd1520866381<br>QQ: 1520866381<br>最新作品：<a href='https://zxmoon.art'>朔月宝鉴-诛仙世界工具助手</a>"
   card_webinfo:
     enable: false
   card_post_series:
