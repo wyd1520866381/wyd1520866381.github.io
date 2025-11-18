@@ -1,6 +1,6 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
+  "name": "edon-site",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "hexo generate",
@@ -27,7 +27,7 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-seo": "^2.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-butterfly": "^5.4.2",
+    "hexo-theme-butterfly": "^5.5.2",
     "hexo-theme-landscape": "^1.1.0",
     "hexo-util": "^3.3.0",
     "moment-timezone": "^0.5.48"

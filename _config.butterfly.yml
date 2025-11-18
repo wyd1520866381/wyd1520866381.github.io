@@ -46,7 +46,7 @@ social:
 # 菜单设置
 menu:
   首页: / || fas fa-home
-  作品: /projects/ || fas fa-project-diagram
+  # 作品: /projects/ || fas fa-project-diagram
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
   # 归档: /archives/ || fas fa-archive
