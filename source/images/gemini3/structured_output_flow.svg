@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+  <rect width="1000" height="420" fill="#0f172a"/>
+  <text x="500" y="36" fill="#e2e8f0" font-size="26" text-anchor="middle">结构化输出驱动的前端生成流程</text>
+  <rect x="60" y="100" width="200" height="90" rx="12" fill="#1f2937"/>
+  <text x="160" y="140" fill="#93c5fd" font-size="18" text-anchor="middle">需求/约束</text>
+  <text x="160" y="162" fill="#e2e8f0" font-size="14" text-anchor="middle">角色+边界</text>
+  <path d="M260 145 L290 145" stroke="#22c55e" stroke-width="4"/>
+  <rect x="290" y="100" width="200" height="90" rx="12" fill="#1f2937"/>
+  <text x="390" y="140" fill="#93c5fd" font-size="18" text-anchor="middle">结构化输出</text>
+  <text x="390" y="162" fill="#e2e8f0" font-size="14" text-anchor="middle">组件树/样式变量/事件表</text>
+  <path d="M490 145 L520 145" stroke="#22c55e" stroke-width="4"/>
+  <rect x="520" y="100" width="200" height="90" rx="12" fill="#1f2937"/>
+  <text x="620" y="140" fill="#93c5fd" font-size="18" text-anchor="middle">代码生成</text>
+  <text x="620" y="162" fill="#e2e8f0" font-size="14" text-anchor="middle">HTML/CSS/JS/TS</text>
+  <path d="M720 145 L750 145" stroke="#22c55e" stroke-width="4"/>
+  <rect x="750" y="100" width="200" height="90" rx="12" fill="#1f2937"/>
+  <text x="850" y="140" fill="#93c5fd" font-size="18" text-anchor="middle">测试/评审</text>
+  <text x="850" y="162" fill="#e2e8f0" font-size="14" text-anchor="middle">用例草案+差异比对</text>
+  <rect x="180" y="240" width="640" height="130" rx="16" fill="#101826"/>
+  <text x="500" y="270" fill="#e2e8f0" font-size="18" text-anchor="middle">关键提示要素</text>
+  <text x="280" y="310" fill="#a7f3d0" font-size="16">输入/输出格式</text>
+  <text x="430" y="310" fill="#a7f3d0" font-size="16">思考等级/温度</text>
+  <text x="610" y="310" fill="#a7f3d0" font-size="16">来源与引用</text>
+  <text x="760" y="310" fill="#a7f3d0" font-size="16">验证与度量</text>
+</svg>

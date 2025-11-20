@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="600" viewBox="0 0 1080 600">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="600" fill="#0b1020"/>
+  <text x="540" y="50" fill="#e2e8f0" font-size="30" text-anchor="middle">前端工作流：提示→规划→生成→测试→评审→部署</text>
+
+  <rect x="80" y="120" width="160" height="80" rx="12" fill="#1f2937" stroke="#334155"/>
+  <text x="160" y="165" fill="#e2e8f0" font-size="18" text-anchor="middle">提示/约束</text>
+
+  <rect x="270" y="120" width="160" height="80" rx="12" fill="#1f2937" stroke="#334155"/>
+  <text x="350" y="165" fill="#e2e8f0" font-size="18" text-anchor="middle">规划/结构化</text>
+
+  <rect x="460" y="120" width="160" height="80" rx="12" fill="#1f2937" stroke="#334155"/>
+  <text x="540" y="165" fill="#e2e8f0" font-size="18" text-anchor="middle">代码生成</text>
+
+  <rect x="650" y="120" width="160" height="80" rx="12" fill="#1f2937" stroke="#334155"/>
+  <text x="730" y="165" fill="#e2e8f0" font-size="18" text-anchor="middle">测试/验证</text>
+
+  <rect x="840" y="120" width="160" height="80" rx="12" fill="#1f2937" stroke="#334155"/>
+  <text x="920" y="165" fill="#e2e8f0" font-size="18" text-anchor="middle">评审/部署</text>
+
+  <path d="M240 160 L270 160" stroke="url(#g1)" stroke-width="4"/>
+  <path d="M430 160 L460 160" stroke="url(#g1)" stroke-width="4"/>
+  <path d="M620 160 L650 160" stroke="url(#g1)" stroke-width="4"/>
+  <path d="M810 160 L840 160" stroke="url(#g1)" stroke-width="4"/>
+
+  <text x="540" y="250" fill="#94a3b8" font-size="16" text-anchor="middle">Gemini 3 智能体模式贯穿上下文与工具调用</text>
+
+  <rect x="160" y="300" width="760" height="200" rx="16" fill="#101826" stroke="#334155"/>
+  <text x="540" y="330" fill="#e2e8f0" font-size="18" text-anchor="middle">关键要素</text>
+
+  <text x="200" y="370" fill="#93c5fd" font-size="16">结构化输出</text>
+  <text x="200" y="400" fill="#93c5fd" font-size="16">思考等级/温度</text>
+  <text x="200" y="430" fill="#93c5fd" font-size="16">来源标注</text>
+
+  <text x="420" y="370" fill="#a7f3d0" font-size="16">测试用例草案</text>
+  <text x="420" y="400" fill="#a7f3d0" font-size="16">Lint/TypeCheck</text>
+  <text x="420" y="430" fill="#a7f3d0" font-size="16">性能预算</text>
+
+  <text x="650" y="370" fill="#fca5a5" font-size="16">渐进式重写</text>
+  <text x="650" y="400" fill="#fca5a5" font-size="16">需求规范协作</text>
+  <text x="650" y="430" fill="#fca5a5" font-size="16">设计到代码</text>
+
+  <text x="860" y="370" fill="#fcd34d" font-size="16">CI/CD闭环</text>
+  <text x="860" y="400" fill="#fcd34d" font-size="16">工具编排</text>
+  <text x="860" y="430" fill="#fcd34d" font-size="16">多模态评审</text>
+
+  <text x="540" y="530" fill="#64748b" font-size="14" text-anchor="middle">示意图：结合 Gemini 3 在 IDE 智能体模式的工作流整合</text>
+</svg>

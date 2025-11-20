@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+  <rect width="1000" height="420" fill="#0f172a"/>
+  <text x="500" y="36" fill="#e2e8f0" font-size="26" text-anchor="middle">屏幕理解到代码的管线（示意）</text>
+  <rect x="80" y="90" width="200" height="220" rx="14" fill="#1f2937"/>
+  <text x="180" y="120" fill="#93c5fd" font-size="18" text-anchor="middle">设计稿/截图</text>
+  <rect x="320" y="110" width="160" height="80" rx="12" fill="#101826"/>
+  <text x="400" y="150" fill="#e2e8f0" font-size="16" text-anchor="middle">屏幕分块</text>
+  <rect x="320" y="210" width="160" height="80" rx="12" fill="#101826"/>
+  <text x="400" y="250" fill="#e2e8f0" font-size="16" text-anchor="middle">语义识别</text>
+  <path d="M280 200 L320 150" stroke="#22c55e" stroke-width="4"/>
+  <path d="M280 220 L320 250" stroke="#22c55e" stroke-width="4"/>
+  <rect x="520" y="110" width="180" height="80" rx="12" fill="#1f2937"/>
+  <text x="610" y="150" fill="#93c5fd" font-size="18" text-anchor="middle">DOM 树/层级</text>
+  <rect x="520" y="210" width="180" height="80" rx="12" fill="#1f2937"/>
+  <text x="610" y="250" fill="#93c5fd" font-size="18" text-anchor="middle">样式令牌/变量</text>
+  <path d="M480 150 L520 150" stroke="#22c55e" stroke-width="4"/>
+  <path d="M480 250 L520 250" stroke="#22c55e" stroke-width="4"/>
+  <rect x="740" y="110" width="180" height="180" rx="12" fill="#1f2937"/>
+  <text x="830" y="150" fill="#93c5fd" font-size="18" text-anchor="middle">代码生成</text>
+  <text x="830" y="180" fill="#e2e8f0" font-size="14" text-anchor="middle">组件/布局/交互</text>
+  <text x="830" y="205" fill="#e2e8f0" font-size="14" text-anchor="middle">语义化标签与 CSS 架构</text>
+</svg>

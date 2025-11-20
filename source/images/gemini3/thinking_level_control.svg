@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="300" viewBox="0 0 920 300">
+  <rect width="920" height="300" fill="#0f172a"/>
+  <text x="460" y="36" fill="#e2e8f0" font-size="26" text-anchor="middle">Gemini 3 思考等级与响应权衡</text>
+  <text x="110" y="90" fill="#93c5fd" font-size="18">low</text>
+  <rect x="150" y="70" width="160" height="60" rx="10" fill="#1f2937"/>
+  <text x="230" y="106" fill="#e2e8f0" font-size="16" text-anchor="middle">低延迟 / 简单任务</text>
+  <text x="380" y="90" fill="#93c5fd" font-size="18">medium</text>
+  <rect x="420" y="70" width="160" height="60" rx="10" fill="#1f2937"/>
+  <text x="500" y="106" fill="#e2e8f0" font-size="16" text-anchor="middle">均衡 / 常规工程</text>
+  <text x="650" y="90" fill="#93c5fd" font-size="18">high</text>
+  <rect x="690" y="70" width="160" height="60" rx="10" fill="#1f2937"/>
+  <text x="770" y="106" fill="#e2e8f0" font-size="16" text-anchor="middle">更深入推理 / 复杂任务</text>
+  <text x="460" y="170" fill="#94a3b8" font-size="16" text-anchor="middle">选择建议：默认使用 medium；复杂推理选 high；轻量场景选 low</text>
+  <text x="460" y="198" fill="#64748b" font-size="14" text-anchor="middle">结合延迟、成本与输出质量综合权衡</text>
+</svg>

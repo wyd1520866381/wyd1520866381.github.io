@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="320" viewBox="0 0 920 320">
+  <rect width="920" height="320" fill="#0f172a"/>
+  <text x="460" y="36" fill="#e2e8f0" font-size="26" text-anchor="middle">Gemini 3 温度设置建议</text>
+  <text x="120" y="86" fill="#93c5fd" font-size="18">默认 1.0</text>
+  <rect x="160" y="66" width="180" height="60" rx="10" fill="#1f2937"/>
+  <text x="250" y="102" fill="#e2e8f0" font-size="16" text-anchor="middle">更稳定的推理与输出</text>
+  <text x="380" y="86" fill="#93c5fd" font-size="18">低温 < 1.0</text>
+  <rect x="420" y="66" width="180" height="60" rx="10" fill="#1f2937"/>
+  <text x="510" y="102" fill="#e2e8f0" font-size="16" text-anchor="middle">可能循环或退化（复杂任务）</text>
+  <text x="640" y="86" fill="#93c5fd" font-size="18">高温 > 1.0</text>
+  <rect x="680" y="66" width="180" height="60" rx="10" fill="#1f2937"/>
+  <text x="770" y="102" fill="#e2e8f0" font-size="16" text-anchor="middle">创意更强但一致性下降</text>
+  <rect x="100" y="160" width="720" height="6" fill="#334155"/>
+  <circle cx="250" cy="163" r="8" fill="#22c55e"/>
+  <text x="250" y="188" fill="#e2e8f0" font-size="14" text-anchor="middle">推荐（多数场景）</text>
+  <text x="460" y="238" fill="#94a3b8" font-size="16" text-anchor="middle">建议：移除显式低温设置，遵循默认 1.0，按场景微调</text>
+  <text x="460" y="266" fill="#64748b" font-size="14" text-anchor="middle">来源：Gemini 3 开发者指南关于温度的说明</text>
+</svg>

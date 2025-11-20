@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#0f172a"/>
+  <text x="480" y="48" fill="#e2e8f0" font-size="28" text-anchor="middle">Gemini 3 vs 2.5（前端/UI代表性指标）</text>
+  <text x="60" y="110" fill="#94a3b8" font-size="20">ScreenSpot-Pro（屏幕理解，%）</text>
+  <rect x="60" y="130" width="700" height="32" fill="#1f2937" rx="6"/>
+  <rect x="60" y="130" width="509" height="32" fill="#22c55e" rx="6"/>
+  <text x="780" y="152" fill="#e2e8f0" font-size="18" text-anchor="end">Gemini 3 Pro：72.7%</text>
+  <rect x="60" y="170" width="700" height="12" fill="#1f2937" rx="6"/>
+  <rect x="60" y="170" width="80" height="12" fill="#ef4444" rx="6"/>
+  <text x="780" y="182" fill="#e2e8f0" font-size="16" text-anchor="end">Gemini 2.5 Pro：11.4%</text>
+
+  <text x="60" y="250" fill="#94a3b8" font-size="20">LiveCodeBench Pro（Elo，高为佳）</text>
+  <rect x="60" y="270" width="700" height="32" fill="#1f2937" rx="6"/>
+  <rect x="60" y="270" width="700" height="32" fill="#22c55e" rx="6"/>
+  <text x="780" y="292" fill="#e2e8f0" font-size="18" text-anchor="end">Gemini 3 Pro：2439</text>
+  <rect x="60" y="310" width="700" height="12" fill="#1f2937" rx="6"/>
+  <rect x="60" y="310" width="510" height="12" fill="#ef4444" rx="6"/>
+  <text x="780" y="322" fill="#e2e8f0" font-size="16" text-anchor="end">Gemini 2.5 Pro：1775</text>
+
+  <text x="480" y="410" fill="#94a3b8" font-size="16" text-anchor="middle">数据来源：Google DeepMind 官方页面（Gemini 3 基准展示）</text>
+  <text x="480" y="438" fill="#64748b" font-size="14" text-anchor="middle">图示为代表性维度示意，完整基准参见文末链接</text>
+</svg>
