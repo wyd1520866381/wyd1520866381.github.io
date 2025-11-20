@@ -108,8 +108,6 @@ console.log(res.text);
 
 ![前端工作流](/images/gemini3/frontend_agent_workflow.svg)
 
-插图位于：`/images/gemini3/ui_quality_comparison.svg` 与 `/images/gemini3/frontend_agent_workflow.svg`。
-
 ---
 
 ## 未来展望
