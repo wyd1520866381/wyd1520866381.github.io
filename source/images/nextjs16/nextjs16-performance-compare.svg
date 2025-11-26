@@ -1,0 +1,33 @@
+<svg width="100%" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bar-15 { fill: #e5e7eb; }
+    .bar-16 { fill: #0070f3; }
+    .text { font-family: sans-serif; font-size: 14px; fill: #333; }
+    .title { font-family: sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+    .label { font-family: sans-serif; font-size: 12px; fill: #666; }
+  </style>
+  <text x="20" y="30" class="title">Next.js 15 (Webpack) vs Next.js 16 (Turbopack) 性能对比</text>
+  <text x="50" y="250" class="label">冷启动时间 (s)</text>
+  <rect x="50" y="80" width="40" height="140" class="bar-15" />
+  <text x="55" y="75" class="text">8.5s</text>
+  <rect x="100" y="150" width="40" height="70" class="bar-16" />
+  <text x="105" y="145" class="text">3.2s</text>
+  <text x="65" y="270" class="label" font-weight="bold">↓ 62%</text>
+  <text x="250" y="250" class="label">热更新 (ms)</text>
+  <rect x="250" y="100" width="40" height="120" class="bar-15" />
+  <text x="255" y="95" class="text">450ms</text>
+  <rect x="300" y="200" width="40" height="20" class="bar-16" />
+  <text x="305" y="195" class="text">45ms</text>
+  <text x="265" y="270" class="label" font-weight="bold">↓ 90%</text>
+  <text x="450" y="250" class="label">生产构建 (s)</text>
+  <rect x="450" y="60" width="40" height="160" class="bar-15" />
+  <text x="455" y="55" class="text">120s</text>
+  <rect x="500" y="160" width="40" height="60" class="bar-16" />
+  <text x="505" y="155" class="text">35s</text>
+  <text x="465" y="270" class="label" font-weight="bold">↓ 71%</text>
+  <rect x="650" y="50" width="20" height="20" class="bar-15" />
+  <text x="680" y="65" class="text">Next.js 15</text>
+  <rect x="650" y="80" width="20" height="20" class="bar-16" />
+  <text x="680" y="95" class="text">Next.js 16</text>
+</svg>
+

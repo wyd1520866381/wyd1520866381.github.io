@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
   <rect width="1000" height="420" fill="#0f172a"/>
   <text x="500" y="36" fill="#e2e8f0" font-size="26" text-anchor="middle">屏幕理解到代码的管线（示意）</text>
-  <rect x="80" y="90" width="200" height="220" rx="14" fill="#1f2937"/>
-  <text x="180" y="120" fill="#93c5fd" font-size="18" text-anchor="middle">设计稿/截图</text>
+  <rect x="80" y="100" width="200" height="200" rx="14" fill="#1f2937"/>
+  <text x="180" y="200" fill="#93c5fd" font-size="18" text-anchor="middle">设计稿/截图</text>
   <rect x="320" y="110" width="160" height="80" rx="12" fill="#101826"/>
   <text x="400" y="150" fill="#e2e8f0" font-size="16" text-anchor="middle">屏幕分块</text>
   <rect x="320" y="210" width="160" height="80" rx="12" fill="#101826"/>

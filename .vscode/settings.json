@@ -6,9 +6,11 @@
         "imgs",
         "Mapbox",
         "Pixi",
+        "Prerendering",
         "Rspress",
         "shadcn",
         "topimg",
-        "Trae"
+        "Trae",
+        "Turbopack"
     ]
 }
