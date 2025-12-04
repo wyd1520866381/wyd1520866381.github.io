@@ -2,10 +2,8 @@
 title: 三、建站过程——Hexo搭建
 date: 2025-05-20 10:00:02
 tags:
-  - 建站
   - Hexo
 categories:
-  - 前端
   - 建站
 series: 建站过程
 ---

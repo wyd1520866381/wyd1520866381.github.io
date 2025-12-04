@@ -2,11 +2,9 @@
 title: 四、建站过程——ButterFly主题配置
 date: 2025-05-20 10:00:03
 tags:
-  - 建站
   - Butterfly
   - Hexo
 categories:
-  - 前端
   - 建站
 series: 建站过程
 ---

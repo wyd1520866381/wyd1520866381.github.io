@@ -2,7 +2,6 @@
 title: React 性能优化实战（三）：组件重渲染与状态管理优化
 categories:
   - 技术专题
-  - React
 series:
   - React 性能优化实战
 date: 2025-06-08 10:00:00

@@ -2,11 +2,9 @@
 title: Gemini3的代码能力对于前端开发者意义见解
 date: 2025-11-20 11:18:01
 categories:
-  - 前端开发
   - 个人见解
 tags:
   - Gemini3
-  - 前端开发
   - AI Code
 ---
 

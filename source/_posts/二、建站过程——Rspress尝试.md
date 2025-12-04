@@ -2,11 +2,9 @@
 title: 二、建站过程——Rspress尝试
 date: 2025-05-20 10:00:01
 tags:
-  - 建站
   - Rspress
   - RsPack
 categories:
-  - 前端
   - 建站
 series: 建站过程
 ---

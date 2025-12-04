@@ -2,7 +2,6 @@
 title: React 性能优化实战（四）：懒加载与代码分割实践
 categories:
   - 技术专题
-  - React
 series:
   - React 性能优化实战
 date: 2025-06-15 10:00:00

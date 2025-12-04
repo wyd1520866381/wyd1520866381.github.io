@@ -3,13 +3,11 @@ title: AI时代前端开发指南
 date: 2025-08-26 19:00:00
 categories:
   - 技术分享
-  - 前端
 series:
   - AI
   - 前端
 tags:
   - AI
-  - 前端
   - Cursor
   - Trae
   - Agent

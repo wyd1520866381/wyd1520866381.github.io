@@ -3,7 +3,6 @@ title: 前端在Restful规范中的应用
 tags:
   - Restful
 categories:
-  - 前端
   - 规范
 date: 2025-05-30 11:32:15
 ---

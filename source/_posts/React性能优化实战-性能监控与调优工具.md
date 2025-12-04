@@ -2,7 +2,6 @@
 title: React 性能优化实战（五）：性能监控与调优工具
 categories:
   - 技术专题
-  - React
 series:
   - React 性能优化实战
 date: 2025-06-21 10:00:00

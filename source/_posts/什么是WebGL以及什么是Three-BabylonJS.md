@@ -6,7 +6,6 @@ tags:
   - ThreeJS
   - BabylonJS
 categories:
-  - 前端
   - 图形学
 ---
 

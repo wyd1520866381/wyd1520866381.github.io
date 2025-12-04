@@ -5,9 +5,7 @@ tags:
   - BabylonJS
   - WebGL
 categories:
-  - 前端
   - 图形学
-  - BabylonJS
 series: BabylonJS
 ---
 

@@ -4,9 +4,7 @@ date: 2025-05-30 12:03:56
 tags:
   - ThreeJS
 categories:
-  - 前端
   - 图形学
-  - ThreeJS
 series: ThreeJS
 ---
 

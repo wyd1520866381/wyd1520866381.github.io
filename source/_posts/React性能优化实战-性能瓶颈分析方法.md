@@ -2,7 +2,6 @@
 title: React 性能优化实战（一）：性能瓶颈分析方法
 categories:
   - 技术专题
-  - React
 series:
   - React 性能优化实战
 date: 2025-05-21 10:00:00

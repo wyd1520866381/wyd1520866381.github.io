@@ -2,7 +2,6 @@
 title: React 性能优化实战（二）：渲染机制与优化原理
 categories:
   - 技术专题
-  - React
 series:
   - React 性能优化实战
 date: 2025-05-28 10:00:00
