@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      .text { font-family: sans-serif; fill: #333; }
+      .title { font-size: 16px; font-weight: bold; }
+      .label { font-size: 12px; }
+      .node { fill: #fff; stroke: #333; stroke-width: 2; rx: 20; ry: 20; }
+      .highlight { fill: #e8f0fe; stroke: #4285f4; }
+      .arrow { stroke: #333; stroke-width: 2; marker-end: url(#arrowhead); fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  
+  <text x="400" y="30" text-anchor="middle" class="text title">AI 驱动的前端职业发展路径</text>
+  
+  <!-- Path -->
+  <path d="M100,200 C200,200 250,100 400,100 S600,200 700,200" stroke="#ddd" stroke-width="4" fill="none" stroke-dasharray="10,5"/>
+  
+  <!-- Node 1: Junior -->
+  <g transform="translate(100, 200)">
+    <circle r="40" class="node" />
+    <text x="0" y="5" text-anchor="middle" class="text label">执行者</text>
+    <text x="0" y="60" text-anchor="middle" class="text label" fill="#666">AI 辅助编码</text>
+  </g>
+  
+  <!-- Node 2: Senior -->
+  <g transform="translate(400, 100)">
+    <circle r="50" class="node highlight" />
+    <text x="0" y="5" text-anchor="middle" class="text label" font-weight="bold">AI 领航员</text>
+    <text x="0" y="70" text-anchor="middle" class="text label" fill="#666">Prompt 调优</text>
+    <text x="0" y="90" text-anchor="middle" class="text label" fill="#666">架构决策</text>
+  </g>
+  
+  <!-- Node 3: Architect/Product -->
+  <g transform="translate(700, 200)">
+    <circle r="40" class="node" />
+    <text x="0" y="5" text-anchor="middle" class="text label">产品/全栈</text>
+    <text x="0" y="60" text-anchor="middle" class="text label" fill="#666">独立交付</text>
+  </g>
+  
+  <!-- Connectors -->
+  <path d="M140,200 L350,100" class="arrow" />
+  <path d="M450,100 L660,200" class="arrow" />
+  
+  <text x="400" y="350" text-anchor="middle" class="text label" font-style="italic">"不被 AI 替代的唯一方式，是成为 AI 的驾驶员"</text>
+</svg>

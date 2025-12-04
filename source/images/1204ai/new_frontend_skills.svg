@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+  
+  <text x="400" y="40" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="18" font-weight="bold">前端能力模型演进：从“金字塔”到“倒金字塔”</text>
+  
+  <!-- Left: Old Model (Standard Pyramid) -->
+  <g transform="translate(50, 80)">
+    <text x="150" y="-10" text-anchor="middle" font-family="sans-serif" fill="#555" font-size="14" font-weight="bold">传统模式 (精力分配)</text>
+    
+    <!-- Bottom: Implementation (Large) -->
+    <path d="M30,350 L270,350 L230,250 L70,250 Z" fill="#e0e0e0" stroke="#999" stroke-width="1" />
+    <text x="150" y="310" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="12">手写代码 / UI还原 / 重复逻辑</text>
+    
+    <!-- Middle: Engineering -->
+    <path d="M70,250 L230,250 L190,150 L110,150 Z" fill="#bdbdbd" stroke="#999" stroke-width="1" />
+    <text x="150" y="210" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="12">工程配置 / 组件封装</text>
+    
+    <!-- Top: Architecture (Small) -->
+    <path d="M110,150 L190,150 L150,50 Z" fill="#757575" stroke="#999" stroke-width="1" />
+    <text x="150" y="115" text-anchor="middle" font-family="sans-serif" fill="#fff" font-size="12">架构</text>
+  </g>
+  
+  <!-- Transition Arrow -->
+  <g transform="translate(320, 200)">
+    <path d="M0,0 L110,0" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" fill="none" />
+    <text x="55" y="-15" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="10">AI 自动化下层能力</text>
+  </g>
+  
+  <!-- Right: New Model (Inverted Pyramid) -->
+  <g transform="translate(450, 80)">
+    <text x="150" y="-10" text-anchor="middle" font-family="sans-serif" fill="#555" font-size="14" font-weight="bold">AI 时代 (价值/精力重心)</text>
+    
+    <!-- Top: Architecture & Business (Large) -->
+    <path d="M30,50 L270,50 L230,150 L70,150 Z" fill="#4285f4" stroke="#1967d2" stroke-width="1" />
+    <text x="150" y="105" text-anchor="middle" font-family="sans-serif" fill="#fff" font-size="12" font-weight="bold">业务洞察 &amp; 架构决策</text>
+    <text x="150" y="125" text-anchor="middle" font-family="sans-serif" fill="#fff" font-size="12" fill-opacity="0.9">(解决"What"与"Why")</text>
+    
+    <!-- Middle: Review & Prompt -->
+    <path d="M70,150 L230,150 L190,250 L110,250 Z" fill="#8ab4f8" stroke="#1967d2" stroke-width="1" />
+    <text x="150" y="195" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="12" font-weight="bold">Prompt工程 &amp; 代码评审</text>
+    <text x="150" y="215" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="12">(人机协作)</text>
+    
+    <!-- Bottom: Manual Coding (Small) -->
+    <path d="M110,250 L190,250 L150,350 Z" fill="#d2e3fc" stroke="#1967d2" stroke-width="1" />
+    <text x="150" y="290" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="12">微调</text>
+  </g>
+
+  <text x="400" y="460" text-anchor="middle" font-family="sans-serif" fill="#333" font-size="12" font-style="italic">AI 接管了"手"，开发者必须进化出更强的"脑"</text>
+</svg>
